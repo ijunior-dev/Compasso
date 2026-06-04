@@ -42,6 +42,26 @@
 })();
 </script>
 <style>
+/* LICENSE GATE */
+#license-gate{position:fixed;inset:0;z-index:9999;background:#0e0f14;display:flex;align-items:center;justify-content:center;padding:24px}
+#license-gate.hidden{display:none}
+.lg-box{background:#13141a;border:1px solid #252630;border-radius:16px;padding:40px 32px;width:100%;max-width:420px;text-align:center}
+.lg-icon{font-size:52px;margin-bottom:16px}
+.lg-title{font-size:22px;font-weight:800;color:#d0d2e0;margin-bottom:6px}
+.lg-sub{font-size:14px;color:#5a5c70;margin-bottom:28px;line-height:1.5}
+.lg-input{width:100%;background:#1a1b22;border:1px solid #252630;border-radius:10px;padding:13px 16px;color:#d0d2e0;font-size:15px;font-family:'Courier New',monospace;letter-spacing:.12em;text-align:center;outline:none;transition:border-color .2s;margin-bottom:12px}
+.lg-input:focus{border-color:#6b9fff}
+.lg-input::placeholder{color:#3a3c50;letter-spacing:0;font-family:-apple-system,sans-serif;font-size:13px}
+.lg-btn{width:100%;background:#6b9fff;color:#fff;border:none;border-radius:10px;padding:13px;font-size:15px;font-weight:600;cursor:pointer;transition:filter .15s;margin-bottom:16px}
+.lg-btn:hover{filter:brightness(1.12)}
+.lg-btn:disabled{opacity:.5;cursor:not-allowed;filter:none}
+.lg-msg{font-size:13px;min-height:20px;transition:color .2s}
+.lg-msg.ok{color:#4caf82}
+.lg-msg.err{color:#e05c5c}
+.lg-footer{margin-top:20px;font-size:12px;color:#3a3c50}
+.lg-footer a{color:#5a5c70;text-decoration:none}
+.lg-footer a:hover{color:#6b9fff}
+
 :root {
   --bg:#0e0f14; --sb:#13141a; --card:#1a1b22; --brd:#252630;
   --tx:#d0d2e0; --muted:#5a5c70; --accent:#6b9fff; --chord:#ffd166;
@@ -299,6 +319,19 @@ body.stage #stage-nav-bar{display:flex}
 </style>
 </head>
 <body>
+
+<!-- TELA DE ATIVAÇÃO DE LICENÇA -->
+<div id="license-gate">
+  <div class="lg-box">
+    <div class="lg-icon">🎸</div>
+    <div class="lg-title">Compasso</div>
+    <div class="lg-sub">Insira sua chave de licença para continuar.<br>A chave foi enviada por email após a compra.</div>
+    <input id="lg-input" class="lg-input" type="text" placeholder="CMPS-XXXX-XXXX-XXXX" maxlength="19" autocomplete="off" spellcheck="false">
+    <button id="lg-btn" class="lg-btn">Ativar Licença</button>
+    <div id="lg-msg" class="lg-msg"></div>
+    <div class="lg-footer">Problemas? <a href="mailto:suporte@compasso.app">suporte@compasso.app</a></div>
+  </div>
+</div>
 
 <div id="app">
   <!-- SIDEBAR -->
@@ -1390,17 +1423,89 @@ function exportPDF(){
   toast('Abrindo diálogo de impressão…');
 }
 
+// ─── LICENSE ──────────────────────────────────────────────────────────────────
+const LIC_KEY = 'compasso_license_v1';
+const API_URL = '/api/validate-license';
+
+function formatLicenseInput(val) {
+  const clean = val.replace(/[^A-Za-z0-9]/g, '').toUpperCase().slice(0, 15);
+  const parts = clean.match(/.{1,4}/g) || [];
+  return parts.join('-');
+}
+
+async function activateLicense(key) {
+  const res = await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ key })
+  });
+  return res.json();
+}
+
+function showApp() {
+  document.getElementById('license-gate').classList.add('hidden');
+}
+
+function initLicense() {
+  const stored = localStorage.getItem(LIC_KEY);
+  if (stored) { showApp(); return; }
+
+  const gate  = document.getElementById('license-gate');
+  const input = document.getElementById('lg-input');
+  const btn   = document.getElementById('lg-btn');
+  const msg   = document.getElementById('lg-msg');
+
+  input.addEventListener('input', () => {
+    input.value = formatLicenseInput(input.value);
+    msg.textContent = '';
+    msg.className = 'lg-msg';
+  });
+
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') btn.click(); });
+
+  btn.addEventListener('click', async () => {
+    const key = input.value.trim();
+    if (key.length < 14) {
+      msg.textContent = 'Digite a chave completa.';
+      msg.className = 'lg-msg err';
+      return;
+    }
+    btn.disabled = true;
+    btn.textContent = 'Verificando…';
+    msg.textContent = '';
+    msg.className = 'lg-msg';
+
+    try {
+      const data = await activateLicense(key);
+      if (data.valid) {
+        localStorage.setItem(LIC_KEY, key);
+        msg.textContent = data.message;
+        msg.className = 'lg-msg ok';
+        setTimeout(showApp, 800);
+      } else {
+        msg.textContent = data.message || 'Chave inválida.';
+        msg.className = 'lg-msg err';
+        btn.disabled = false;
+        btn.textContent = 'Ativar Licença';
+      }
+    } catch {
+      msg.textContent = 'Erro de conexão. Verifique sua internet.';
+      msg.className = 'lg-msg err';
+      btn.disabled = false;
+      btn.textContent = 'Ativar Licença';
+    }
+  });
+}
+
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 function init(){
-  // Populate keys select with ID pattern for init
+  initLicense();
   _tid = 200;
   load();
-  // Fix _nextId
   if(S.songs.length){
     _tid=Math.max(...S.songs.map(s=>s.id))+1;
   }
   render();
-  // Show first song by default if nothing active
   if(!S.activeId && S.songs.length){
     S.activeId=S.songs[0].id;
     renderStage();
