@@ -28,7 +28,8 @@ module.exports = async function handler(req, res) {
     .single();
 
   if (error || !data) {
-    return res.status(200).json({ valid: false, message: 'Chave não encontrada.' });
+    console.error('Supabase error:', JSON.stringify(error));
+    return res.status(200).json({ valid: false, message: 'Chave não encontrada.', debug: error?.message });
   }
 
   if (data.status === 'revoked') {
