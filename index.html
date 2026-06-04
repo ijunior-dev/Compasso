@@ -1428,7 +1428,7 @@ const LIC_KEY = 'compasso_license_v1';
 const API_URL = '/api/validate-license';
 
 function formatLicenseInput(val) {
-  const clean = val.replace(/[^A-Za-z0-9]/g, '').toUpperCase().slice(0, 15);
+  const clean = val.replace(/[^A-Za-z0-9]/g, '').toUpperCase().slice(0, 16);
   const parts = clean.match(/.{1,4}/g) || [];
   return parts.join('-');
 }
