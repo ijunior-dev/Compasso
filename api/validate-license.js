@@ -1,9 +1,12 @@
 const { createClient } = require('@supabase/supabase-js');
 
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_KEY
-);
+const SUPA_URL = process.env.SUPABASE_URL || '';
+const SUPA_KEY = process.env.SUPABASE_SERVICE_KEY || '';
+
+console.log('SUPABASE_URL configured:', SUPA_URL ? SUPA_URL.slice(0, 30) + '...' : 'MISSING');
+console.log('SUPABASE_KEY configured:', SUPA_KEY ? 'SET (length=' + SUPA_KEY.length + ')' : 'MISSING');
+
+const supabase = createClient(SUPA_URL, SUPA_KEY);
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
