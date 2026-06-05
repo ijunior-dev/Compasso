@@ -378,6 +378,22 @@ body.stage #stage-nav-bar{display:flex}
   </div>
 </div>
 
+<!-- BOTTOM NAV -->
+<div id="bottom-nav">
+  <button class="bn-btn active" id="bn-inicio" onclick="navTo(1)">
+    <span class="bn-icon">🏠</span>
+    <span>Início</span>
+  </button>
+  <button class="bn-btn" id="bn-musicas" onclick="navTo(2)">
+    <span class="bn-icon">🎵</span>
+    <span>Músicas</span>
+  </button>
+  <button class="bn-btn" id="bn-mais" onclick="navTo(3)">
+    <span class="bn-icon">☰</span>
+    <span>Mais</span>
+  </button>
+</div>
+
 <div id="app">
   <!-- SIDEBAR -->
   <aside id="sb">
@@ -1640,21 +1656,5 @@ function init(){
 
 init();
 </script>
-
-<!-- BOTTOM NAV -->
-<div id="bottom-nav">
-  <button class="bn-btn active" id="bn-inicio" onclick="navTo(1)">
-    <span class="bn-icon">🏠</span>
-    <span>Início</span>
-  </button>
-  <button class="bn-btn" id="bn-musicas" onclick="navTo(2)">
-    <span class="bn-icon">🎵</span>
-    <span>Músicas</span>
-  </button>
-  <button class="bn-btn" id="bn-mais" onclick="navTo(3)">
-    <span class="bn-icon">☰</span>
-    <span>Mais</span>
-  </button>
-</div>
 </body>
 </html>
