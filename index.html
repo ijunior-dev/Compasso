@@ -1626,16 +1626,16 @@ function initLicense() {
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 function init(){
-  initLicense();
   _tid = 200;
   load();
   if(S.songs.length){
     _tid=Math.max(...S.songs.map(s=>s.id))+1;
   }
-  document.getElementById('app').classList.add('hidden');
-  render();
   if(!S.activeId && S.songs.length){ S.activeId=S.songs[0].id; }
+  document.getElementById('app').classList.add('hidden');
   navTo(1);
+  render();
+  initLicense();
 }
 
 init();
