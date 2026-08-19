@@ -6,3 +6,4 @@ node_modules/
 .claude/
 licence.txt
 *.verify
+cifras/
