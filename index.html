@@ -454,8 +454,7 @@ body.stage #stage-nav-bar{display:flex}
       <div class="sb-logo">🎸 Repertório de Palco</div>
       <input class="sb-search" type="search" id="search" placeholder="Buscar por título ou artista…" oninput="onSearch(this.value)">
       <div id="cifra-wrap" style="display:none;margin-top:8px;gap:6px">
-        <button class="btn btn-ghost btn-sm" style="flex:1;justify-content:center;font-size:12px" onclick="searchCifraClub()">🌐 Buscar</button>
-        <button class="btn btn-primary btn-sm" style="flex:1;justify-content:center;font-size:12px" onclick="openImportModal()">📥 Importar Cifra</button>
+        <button class="btn btn-ghost btn-sm" style="flex:1;justify-content:center;font-size:12px" onclick="searchCifraClub()">🌐 Buscar no CifraClub ↗</button>
       </div>
     </div>
     <div class="sb-body" id="sb-body"></div>
@@ -576,31 +575,6 @@ body.stage #stage-nav-bar{display:flex}
   </div>
 </div>
 
-<!-- Import from CifraClub modal -->
-<div class="ov" id="ov-import">
-  <div class="modal" style="max-width:500px;width:95%">
-    <div class="modal-h">📥 Importar do CifraClub</div>
-    <div class="modal-b" style="margin-bottom:14px">
-      <div class="fg">
-        <label class="fl">Artista e Título</label>
-        <input class="fi" id="imp-q" placeholder="Ex: Legião Urbana - Monte Castelo"
-               onkeydown="if(event.key==='Enter')startImport()" autocomplete="off" spellcheck="false">
-        <div style="font-size:11px;color:var(--muted);margin-top:6px;line-height:1.7">
-          <strong style="color:var(--tx)">Formatos aceitos:</strong><br>
-          • <em>Artista - Título</em> → Legião Urbana - Monte Castelo<br>
-          • URL direta → https://www.cifraclub.com.br/legiao-urbana/monte-castelo/<br>
-          • Só o título → Monte Castelo (busca automática)
-        </div>
-      </div>
-      <div id="imp-status" style="font-size:13px;color:var(--muted);margin-top:12px;min-height:20px;line-height:1.5"></div>
-    </div>
-    <div class="modal-acts">
-      <button class="btn btn-ghost btn-sm" onclick="closeModal('ov-import')">Cancelar</button>
-      <button class="btn btn-primary btn-sm" id="btn-import" onclick="startImport()">📥 Buscar e Importar</button>
-    </div>
-  </div>
-</div>
-
 <!-- Toast -->
 <div id="toast"></div>
 
@@ -631,152 +605,119 @@ function mkC(key) {
   return `[Intro]\n${I}  ${V}  ${vi}  ${IV}\n\n[Verso 1]\n${p(I)}${V}\nPrimeira linha da letra da música\n${p(vi)}${IV}\nSegunda linha da letra continua\n\n[Pré-Refrão]\n${p(IV)}${V}\nLinha de transição para o refrão\n\n[Refrão]\n${p(I)}${V}\nRefrão primeira linha aqui\n${p(vi)}${IV}\nRefrão segunda linha aqui\n${p(I)}${p(IV)}\nFinal do refrão aqui\n\n[Verso 2]\n${p(I)}${V}\nTerceira estrofe da música\n${p(vi)}${IV}\nQuarta linha da letra aqui\n\n[Refrão]\n${p(I)}${V}\nRefrão primeira linha aqui\n${p(vi)}${IV}\nRefrão segunda linha aqui\n${p(I)}${p(IV)}\nFinal do refrão aqui\n\n[Final]\n${I}  ${IV}  ${I}`;
 }
 
-// Specific song contents
-const C_GAROTA = `[Intro]\nFmaj7  G7  Gm7  Gb7\n\n[Verso]\nFmaj7           G7\nOlha que coisa mais linda\nGm7             Gb7\nMais cheia de graça\nFmaj7                G7\nÉ ela menina que vem e que passa\nGm7                      Gb7\nNum doce balanço caminho do mar\n\n[Ponte]\nBbm7            Eb9\nAh por que estou tão sozinho\nAbmaj7          Db9\nAh por que tudo é tão triste\nAm7             D9\nA beleza que existe\nGm7             C7\nA beleza que não é só minha\n\n[Verso]\nFmaj7           G7\nOlha que coisa mais linda\nGm7             Gb7\nMais cheia de graça\nFmaj7                G7\nÉ ela menina que vem e que passa\nGm7                      Gb7\nNum doce balanço caminho do mar`;
+// Songs from cifras/Ele
+const C_ADIVINHA = `[Intro]\nD#m7  A#m7  G#m7  (D#m7  A#7)\n\n[Verso]\nD#m7\nAinda lembro aquela noite\n        A#m7\nSó porque eu cheguei mais tarde\nG#m7\nInda arde a lembrança de te ver\n        D#m7      A#7\nAli tão contrariada\nD#m7\nMeu bem, meu bem será que você\n     A#m7\nNão vê, não houve nada\nG#m7                    D#m7    A#7\nSó o passado rondando minha porta feito alma penada\nD#m7                A#m7\nVocê vive me dizendo que o pecado mora ao lado\n      G#m7\nPor favor, não entra nessa\n       D#m7\nPorque um dia inda te explico direito\n\n[Refrão]\nD#m7\nPorque eu só faço com você\nC#9\nSó quero com você\nG#9         A5  A#5  B5  A#5\nSó gosto com você\nD#m7        A#7\nAdivinha o que?\n\n[Repete verso e refrão até o final]`;
 
-const C_AGUAS = `[Intro]\nG  D  Em  C\n\n[Verso 1]\nG              D\nÉ pau é pedra\nEm             C\nÉ o fim do caminho\nG              D\nÉ um resto de toco\nEm             C\nÉ um pouco sozinho\n\n[Verso 2]\nG              D\nÉ um caco de vidro\nEm             C\nÉ a vida é o sol\nG              D\nÉ a noite é a morte\nEm             C\nÉ o laço é o anzol\n\n[Refrão]\nG         D\nÉ madeira de vento\nEm        C\nNo atalho no alto\nG            D\nÉ uma vela um clarão\nEm        C\nÉ o fundo do poço\n\n[Coda]\nG  D  Em  C  (repete)`;
+const C_TODAFORMA = `[Intro]\nG  Em  D  C\n\n[Verso 1]\nG\nEu não pedi pra nascer\nEm\nEu não nasci pra perder\nD\nNem vou sobrar de vítima\n     C\nDas circunstâncias\nG\nEu tô plugado na vida\nEm\nEu tô curando a ferida\nD\nÀs vezes eu me sinto\n     C\nUma mola encolhida\n\n[Verso 2]\nG\nVocê é bem como eu\nEm\nConhece o que é ser assim\nD\nSó que dessa história\n   C\nNinguém sabe o fim\nG\nVocê não leva pra casa\nEm\nVocê só traz o que quer\nD\nEu sou teu homem\n     C\nVocê é minha mulher\n\n[Refrão]\nG\nE a gente vive junto\nG5+\nE a gente se dá bem\n    C\nNão desejamos mal\n   Cm       D\nA quase ninguém\nG\nE a gente vai à luta\nG5+\nE conhece a dor\n    C\nConsideramos justa\nCm        D\nToda forma de amor`;
 
-const C_OQUE = `[Intro]\nG  C  G  D  (2x)\n\n[Verso 1]\nG              C\nEu fico com a pureza\nG                D\nDas respostas das crianças\nG              C\nÉ a vida é bonita\nG              D\nÉ bonita e é bonita\n\n[Verso 2]\nG                   C\nVeja o sol dessa manhã\nG                 D\nTão doce que alumia\nG              C\nO céu aberto pra nós dois\nG              D\nQue lindo que alumia\n\n[Refrão]\nG             C\nO que é o que é meu irmão\nG             D\nO que é o que é meu amor\nG             C\nO que é o que é meu bem\nG             D\nVoar é preciso é preciso`;
+const C_PESCADOR = `[Intro]\n(Capo na 1ª casa — cifra em C, soa em Db)\nAm  G  Am  G\n\n[Primeira Parte]\nAm                G\nSe meus joelhos não doessem mais\nAm\nDiante de um bom motivo\n         G\nQue me traga fé, que me traga fé\n\n[Segunda Parte]\nAm\nSe por alguns segundos\n   G\nEu observar, e só observar\nAm\nA isca e o anzol, a isca e o anzol\n  G\nA isca e o anzol, a isca e o anzol\nAm\nAinda assim estarei\n  G\nPronto pra comemorar\n         Am\nSe eu me tornar menos faminto\n    G\nQue curioso, que curioso\n     Am              G\nO mar escuro trará o medo lado a lado\n            Am           G\nCom os corais mais coloridos\n\n[Refrão]\n  C\nValeu a pena, eh eh\n    Am\nValeu a pena, eh eh\n         G\nSou pescador de ilusões\nSou pescador de ilusões\n\n[Quarta Parte]\nAm\nSe eu ousar catar\n   G\nNa superfície de qualquer manhã\nAm\nAs palavras de um livro\n G\nSem final, sem final\n  Am              G\nSem final, sem final, final`;
 
-const C_MONTE = `[Intro]\nDm  Am  Bb  F  C  (2x)\n\n[Verso 1]\nDm              Am\nAinda que eu falasse\nBb              F  C\nA língua dos homens\nDm               Am\nE falasse a língua dos anjos\nBb                F  C\nSem amor eu nada seria\n\n[Verso 2]\nDm              Am\nÉ só o amor é só o amor\nBb              F  C\nQue conhece o que é verdade\nDm                   Am\nO amor é bom não quer o mal\nBb                F  C\nNão sente inveja ou se irrita\n\n[Refrão]\nBb          F\nO amor não fica irritado\nBb          C\nNão guarda rancor\nDm              Am\nNão se alegra com a injustiça\nBb         F  C\nMas fica feliz com a verdade\n\n[Ponte]\nF    Bb   C    Dm\nAmor  amor  amor  amor\n\n[Coda]\nDm  Am  Bb  F  C  Dm`;
+const C_DOSEULADO = `[Intro]\nD5(9)  Am7  C9  G  G/F#  D5(9)\nLa la la la la la la la la la la la\n\n[Primeira Parte]\nD5\nFaz muito tempo, mas eu me lembro\n      A5\nVocê implicava comigo\n   C5             B5+\nMas hoje vejo que tanto tempo\n         G5   F#5+  D5\nMe deixou muito mais calmo\nD5\nO meu comportamento egoísta\n     A5\nSeu temperamento difícil\n   C5              B5+\nVocê me achava meio esquisito\n         D5\nEu te achava tão chata\n\n[Segunda Parte]\nC9              G/B\nMas tudo que acontece na vida\n     D5(9)\nTem um momento e um destino\nC9                G/B\nViver é uma arte, é um ofício\n      D5(9)\nSó que precisa cuidado\nC9                    G/B\nPra perceber que olhar só pra dentro\n       D5(9)\nÉ o maior desperdício\n      Em9        G7M      D5(9)\nO teu amor pode estar do seu lado\n\n[Refrão]\n     D5(9)   Am7   C9  G  G/F#  D5(9)\nO amor é o calor que aquece a alma\n         Am7          C9    G/B\nO amor tem sabor pra quem bebe a sua água`;
 
-const C_HALLELUJAH = `[Intro]\nC  Am  C  Am\n\n[Verso 1]\nC                  Am\nI've heard there was a secret chord\nC                    Am\nThat David played and it pleased the Lord\nF            G           C    G\nBut you don't really care for music do ya\nC        F       G\nIt goes like this the fourth the fifth\nAm             F\nThe minor fall the major lift\nG           Em         Am\nThe baffled king composing Hallelujah\n\n[Refrão]\nF           Am\nHallelujah Hallelujah\nF           C    G    C\nHallelujah Hallelujah\n\n[Verso 2]\nC                Am\nYour faith was strong but you needed proof\nC                  Am\nYou saw her bathing on the roof\nF              G          C   G\nHer beauty and the moonlight overthrew ya\nC          F         G\nShe tied you to a kitchen chair\nAm           F\nShe broke your throne she cut your hair\nG               Em       Am\nAnd from your lips she drew the Hallelujah\n\n[Refrão]\nF           Am\nHallelujah Hallelujah\nF           C    G    C\nHallelujah Hallelujah`;
+const C_FACIL = `[Intro]\nG  D/F#  F  C  (4x)\n\n[Primeira Parte]\nG           D/F#\nTudo é tão bom\n      C            Bm\nE azul e calmo como sempre\n    C             Bm      Am\nOs olhos piscaram de repente, um sonho\nG           D/F#\nAs coisas são assim\nC            Bm\nQuando se está amando\n    C              Bm\nAs bocas não se deixam e um segundo\nAm\nNão tem fim\n\n[Pré-Refrão]\nEm         Bm       C      G\nUm dia feliz, às vezes é muito raro\nEm         Bm\nFalar é complicado, quero uma\nC   C/D\ncanção\n\n[Refrão]\nG              D/F#\nFácil, extremamente fácil\n      F            C\nPra você e eu e todo mundo\nCantar junto`;
 
-const C_IMAGINE = `[Intro]\nC  Cmaj7  F  (2x)\n\n[Verso 1]\nC         Cmaj7  F\nImagine there's no heaven\nC         Cmaj7  F\nIt's easy if you try\nC         Cmaj7  F\nNo hell below us\nC         Cmaj7  F\nAbove us only sky\n\n[Pré-Refrão]\nF               Am/E  Dm\nImagine all the people\nDm7          G    G7\nLiving for today... ah\n\n[Refrão]\nF       G        C    E7\nYou may say I'm a dreamer\nF       G            C  E7\nBut I'm not the only one\nF          G         C    E7\nI hope someday you'll join us\nF       G          C\nAnd the world will be as one\n\n[Verso 2]\nC         Cmaj7  F\nImagine there's no countries\nC         Cmaj7  F\nIt isn't hard to do\nC           Cmaj7    F\nNothing to kill or die for\nC         Cmaj7  F\nAnd no religion too`;
+const C_SOHOJE = `[Primeira Parte]\nE\nHoje eu preciso te encontrar\n      B5(9)\nDe qualquer jeito\nNem que seja só pra te levar\n   C#m\nPra casa\n           A\nDepois de um dia normal\nE\nOlhar teus olhos\nDe promessas fáceis\n     B5(9)\nE te beijar a boca\n         C#m\nDe um jeito que te faça rir\n     A\nQue te faça rir\nF#m\nHoje eu preciso te abraçar\n    B5(9)\nSentir teu cheiro de roupa limpa\n     F#m\nPra esquecer os meus anseios\n  B5(9)\nE dormir em paz\n\n[Segunda Parte]\nE\nHoje eu preciso ouvir\n     B5(9)\nQualquer palavra tua\nQualquer frase exagerada\n     C#m\nQue me faça sentir alegria\n     A\nEm estar vivo\n\n[Refrão]\nE              F#m\nHoje preciso de você\n     B5(9)\nCom qualquer humor\nE\nCom qualquer sorriso\nF#m\nHoje só tua presença\n         B5(9)   Am\nVai me deixar feliz, só hoje`;
 
-const C_ASA = `[Intro]\nG  D7  G\n\n[Verso 1]\nG                    C    D7\nQuando olhei a terra ardendo\nD7                   G\nQual a fogueira de São João\nG                    C     D7\nEu perguntei a Deus do céu por que\nD7                   G\nTamanha judiação\n\n[Verso 2]\nG                  C    D7\nQue braseiro que fornalha\nD7                 G\nNem um pé de palhação\nG                    C    D7\nPor falta d'água perdi meu gado\nD7                G\nMorreu de sede meu alazão\n\n[Refrão]\nG               C\nAté mesmo a asa branca\nG               D7\nBateu asas do sertão\nG                  C\nEntão eu disse adeus Rosinha\nD7                 G\nGuarda saudade do teu João\n\n[Verso 3]\nG                  C    D7\nNo ano que vem se Deus quiser\nD7                 G\nVou pra lá compadre João\nG                C      D7\nEsperai que o São Francisco\nD7                G\nVai nos dar água em abundância`;
+const C_EPRECISO = `[Intro]\nD  D7M  D7  G  Gm6  D  Bm  E  G  A7\n\n[Primeira Parte]\nD\nQuem espera que a vida\n     D7M\nSeja feita de ilusão\n     D7\nPode até ficar maluco\n     G\nOu morrer na solidão\n     Gm6\nÉ preciso ter cuidado\n         D          Bm\nPra mais tarde não sofrer\nE          G      A7\nÉ preciso saber viver\n\nD\nToda pedra no caminho\n     D7M\nVocê pode retirar\n     D7\nNuma flor que tem espinhos\n  G\nVocê pode se arranhar\n   Gm6\nSe o bem e o mal existem\n     D           Bm\nVocê pode escolher\nE          G      A7\nÉ preciso saber viver\n\n[Refrão]\nG        D    Bm\nÉ preciso saber viver\nG        D    Bm\nÉ preciso saber viver\nG        D    Bm\nÉ preciso saber viver\nE        G    A7\nSaber viver`;
 
-const C_HEY = `[Intro]\nF  C  Dm  Bb  F  C  F\n\n[Verso 1]\nF                C\nHey Jude don't make it bad\nDm              G7           F\nTake a sad song and make it better\nF                 C\nRemember to let her into your heart\nC7                  F\nThen you can start to make it better\n\n[Verso 2]\nF               C\nHey Jude don't be afraid\nDm               G7          F\nYou were made to go out and get her\nF               C\nThe minute you let her under your skin\nC7                 F\nThen you begin to make it better\n\n[Ponte]\nBb                F\nAnd any time you feel the pain\nBb                  F\nHey Jude refrain don't carry the world\nEb              Bb             F\nUpon your shoulders\nBb                F\nFor well you know that it's a fool\nBb              F\nWho plays it cool by making his world\nEb         F7    F\nA little colder\n\n[Coda - repetição]\nF  Eb  Bb  F  (repete na-na-na...)`;
+const C_PRADIZERADEUS = `[Intro]\nG\n\n[Primeira Parte]\n     D       C   D  C\nVocê apareceu do nada\n    G    D    C    G\nE você mexeu demais comigo\n    G    D    C     G\nNão quero ser só mais um amigo\n    D       C  D  C\nVocê nunca me viu sozinho\n    G    D    C   G\nE você nunca me ouviu chorar\n    G   D   C   G   C D\nNão dá pra imaginar o quanto\n\n[Refrão]\nG    B7   C\nÉ cedo ou tarde demais\n     G   D        C   G\nPra dizer adeus, pra dizer jamais\nG    B7   C\nÉ cedo ou tarde demais\n     G   D        C   G\nPra dizer adeus, pra dizer jamais\n\n[Segunda Parte]\nD                C\nEu já fiquei tão mal sozinho\nD\nEu já tentei, eu quis\nC\nNão dá pra imaginar o quanto\n\n[Refrão Final]\nG    B7   C\nÉ cedo ou tarde demais\n     G   D        C   G\nPra dizer adeus, pra dizer jamais`;
 
-const C_EVIDENCIAS = `[Intro]\nG  D  Em  C  (2x)\n\n[Verso 1]\nG                  D\nVocê diz que não me ama\nEm                 C\nMas capricha no olhar\nG                D\nAí cê fica e você vai\nEm              C\nE depois vem me chamar\n\n[Verso 2]\nG                D\nVocê diz que sou bonito\nEm                C\nMas olha pra outro lado\nG               D\nMe faz quase um carinho\nEm               C\nDepois vira de lado\n\n[Refrão]\nG                D\nIsso não é amor\nEm              C\nIsso é crueldade\nG                   D\nNão me deixa com saudade\nEm              C\nSe não me quer de verdade\n\n[Verso 3]\nG               D\nVocê diz que eu to sonhando\nEm                 C\nQue é brincadeira isso\nG                D\nMas o meu coração insiste\nEm              C\nNessa tal de evidência`;
+const C_SOMBRA = `[Intro]\nGm  Cm7  Dm7  Gm  Cm7  Dm7\n\n[Verso]\nGm                          Cm7\nEu sei que ela nunca mais apareceu\nNa minha vida\n     Dm7\nMinha mente\nGm\nNovamente eu sei que o que ficou\n         Cm7\nNão desapareceu, a minha vida muda\nDm7\nSempre\n    Gm\nLentamente como a lua\n         Cm7\nQue dá voltas pelo céu e mexe\n          Dm7\nTanto com o presente\n     Gm\nQuanto o ausente, eu sei, eu sei, eu sei\nCm7\nEu sei, não sou vidente\n     Dm7\nMas sei o rumo\n   Gm\nDo seu coração\n\nDm7\nPermita\n     Cm7\nQue o amor invada sua casa\n   Dm7\nCoração\n     Cm7\nQue o amor invada sua casa\n Gm\nSaia, não vaia\n         Cm7\nNão caia na navalha\n         Dm7\nQue corta a tua carne\n     Gm\nE sangra tudo o que você precisa\n     Cm7   Dm7\nDescobrir`;
 
-const C_XODO = `[Intro]\nG  D  Em  C  G  D  G\n\n[Verso 1]\nG               D\nEu só quero um xodó\nEm              C\nPra me fazer feliz\nG               D\nPra viver a dois\nEm              G\nNum mundo de raiz\n\n[Verso 2]\nG               D\nEu só quero alguém\nEm               C\nPra me dar carinho\nG               D\nQue seja meu bem\nEm              G\nQue seja meu caminho\n\n[Refrão]\nC               G\nXodó xodó meu xodó\nD               G\nXodó vem ser meu amor\nC               G\nXodó xodó meu xodó\nD               G\nXodó vem trazer calor`;
+const C_TEMPOPERDIDO = `[Intro]\nC7M  Am7  Bm7  Em  C  Am7  Bm7  Em\n\n[Primeira Parte]\n         C            Am7\nTodos os dias quando acordo\nBm            Em\nNão tenho mais o tempo que passou\n         C            Am7\nMas tenho muito tempo\nBm            Em\nTemos todo o tempo do mundo\nC              Am7\nTodos os dias antes de dormir\nBm                Em\nLembro e esqueço como foi o dia\nC              Am7\nSempre em frente\nBm            Em\nNão temos tempo a perder\nC              Am7\nNosso suor sagrado\nBm\nÉ bem mais belo que esse\nEm\nSangue amargo\nC       Am7\nE tão sério\n\nBm      Em\nE selvagem\n\n[Segunda Parte]\nC              Am7          Bm\nVeja o sol dessa manhã tão cinza\n           Em                  C\nA tempestade que chega é da cor\n         Am7\nDos teus olhos\n  Bm  Em\nCastanhos\n         C           Am7\nEntão me abraça forte\n    Bm\nE diz mais uma vez\n         Em         C       Am7\nQue já estamos distantes de tudo\n\nBm            Em\nTemos nosso próprio tempo (3x)\n\n[Terceira Parte]\nC          Am7    Bm\nNão tenho medo do escuro\n      Em        C     Am7\nMas deixe as luzes acesas\n  Bm  Em\nAgora\n\nC             Am7\nO que foi escondido é o que se escondeu\n   Bm\nE o que foi prometido\n Em\nNinguém prometeu\n    C           Am7\nNem foi tempo perdido\nBm Em\nSomos tão jovens`;
+
+const C_SERA = `[Intro]\nC  G  Am  F\n\n[Primeira Parte]\nC        G      Am\nTire suas mãos de mim\n    F         C\nEu não pertenço a você\n    G      Am\nNão é me dominando assim\n     F         C\nQue você vai me entender\n       G\nEu posso estar sozinho\nAm            F\nMas eu sei muito bem aonde estou\nAm         Em\nVocê pode até duvidar\nF          G\nAcho que isso não é amor\n\nAm                F\nDa nossa própria criação\nC           G\nSerão noites inteiras\nAm            F\nTalvez por medo da escuridão\nC        G\nFicaremos acordados\nAm            F\nImaginando alguma solução\nAm         Em\nPra que esse nosso egoísmo\nF          G\nNão destrua nosso coração\n\n[Refrão]\nG        Dm\nSerá só imaginação\nG            Dm\nSerá que nada vai acontecer\nG              Dm\nSerá que é tudo isso em vão\nG              Dm    Am\nSerá que vamos conseguir vencer\n F  G\nÔ ô ô ô ô ô\n\n[Segunda Parte]\nC              G\nNos perderemos entre monstros\n\n[Terceira Parte]\nC              G/B\nBrigar pra quê, se é sem querer\n   Gm/Bb        Dm\nQuem é que vai nos proteger\n   C              G/B\nSerá que vamos ter que responder\n Gm/Bb\nPelos erros a mais\nDm\nEu e você\n\n[Final]\nG  F  G  F  G  F`;
+
+const C_AINDACEDO = `[Intro]\nDm  C  Am7\n\n[Primeira Parte]\n       Dm\nUma menina me ensinou\nC              Am7\nQuase tudo que eu sei\n     Dm\nEra quase escravidão\nC              Am7\nMas ela me tratava como um rei\n     Dm\nEla fazia muitos planos\nC              Am7\nEu só queria estar ali\n     Dm\nSempre ao lado dela\nC              Am7\nEu não tinha onde ir\n     Dm\nMas, egoísta que eu sou\nC              Am7\nMe esqueci de ajudar\n     Dm\nA ela como ela me ajudou\nC              Am7\nE não quis me separar\n     Dm\nEla também estava perdida\nC                   Am7\nE por isso se agarrava a mim também\n     Dm\nE eu me agarrava a ela\nC              Am7\nPorque eu não tinha mais ninguém\n\n[Refrão]\n     Dm\nE eu dizia: Ainda é cedo\nC              Am7\nCedo, cedo, cedo, cedo\n     Dm\nAh eu dizia: Ainda é cedo\nC              Am7\nCedo, cedo, cedo, cedo\nDm  C  Am7\nAh eu dizia: Ainda é cedo\n\n[Segunda Parte]\n     Dm\nSei que ela terminou\nC              Am7\nO que eu não comecei\n     Dm\nE o que ela descobriu\nC              Am7\nEu aprendi também, eu sei\n     Dm\nEla falou: — Você tem medo\nC                  Am7\nAí eu disse: — Quem tem medo é você\n     Dm\nFalamos o que não devia\nC              Am7\nNunca ser dito por ninguém\n     Dm\nEla me disse: — Eu não sei\nC                  Am7\nMais o que eu sinto por você\n     Dm\nVamos dar um tempo\nC          Am7\nUm dia a gente se vê`;
+
+const C_QUEPAIS = `[Intro]\nEm  C  D  (12x)\n\n[Primeira Parte]\nEm        C     D\nNas favelas, no senado\nEm            C   D\nSujeira pra todo lado\nEm                   C   D\nNinguém respeita a constituição\nEm                   C        D  Em\nMas todos acreditam no futuro da nação\n\n[Refrão]\nEm       C   D\nQue país é esse\nEm       C   D\nQue país é esse\nEm       C   D\nQue país é esse\n\n[Segunda Parte]\nEm            C          D\nNo Amazonas, no Araguaia iá iá iá\nEm          C   D\nNa baixada fluminense\nEm            C     D\nMato Grosso, Minas Gerais\nEm                C   D\nE no nordeste tudo em paz\nEm       C  D\nNa morte eu descanso\nEm             C   D\nMas o sangue anda solto\nEm            C   D\nManchando os papéis\nEm         C   D\nDocumentos fiéis\nEm            C   D\nAo descanso do patrão\n\n[Ponte]\nEm            C     D\nTerceiro mundo se for\nEm        C     D\nPiada no exterior\nEm            C      D\nMas o Brasil vai ficar rico\nEm            C      D\nVamos faturar um milhão\nEm            C       D\nQuando vendermos todas as almas\nEm            C   D\nDos nossos índios num leilão`;
+
+const C_ERAUMGAROTO = `[Intro]\n(Capo na 1ª casa — cifra em F, soa em F#)\nF  C  Bb  C\n\n[Primeira Parte]\nF          C\nEra um garoto que como eu\nBb              C\nAmava os Beatles e os Rolling Stones\nF          C\nGirava o mundo sempre a cantar\nBb              C\nAs coisas lindas da América\nF                C\nNão era belo, mas mesmo assim\nBb        C\nHavia mil garotas a fim\nF               C\nCantava "Help!" and "Ticket to Ride"\nBb        C\nOh "Lady Jane" ou "Yesterday"\nF           Bb9\nCantava "viva a liberdade"\nC9      Bb9      F/A\nMas uma carta sem esperar\nF           Bb9\nDa sua guitarra o separou\nG              C\nFora chamado na América\n\n[Refrão]\nF   Ab  Bb  B   C\nStop com Rol-ling Stones!\nF   Ab  Bb  B   C\nStop com Beatle's songs!\nBb    Am   Bb  F\nMandado foi ao Vietnã\nBb    Am   Bb  B  C\nLutar com viet-congs\n\n[Segunda Parte]\nBb                C\nAmava os Beatles e os Rolling Stones\nF               C\nGirava o mundo, mas acabou\nBb              C\nFazendo a guerra do Vietnã\nF                 C\nCabelos longos não usa mais\nBb                C\nNão toca sua guitarra, e sim\nF                    C\nUm instrumento que sempre dá\nBb                C\nA mesma nota (rá-tá-tá-tá)\nF                Bb\nNão tem amigos, não vê garotas\nC       Bb       F/A\nSó gente morta caindo ao chão\nF          Bb\nAo seu país não voltará\nG               C\nPois está morto no Vietnã`;
+
+const C_TAMBEM = `[Intro]\nA  D9  A  D9\n\n[Primeira Parte]\nA                D9\nEssa não é mais uma carta de amor\nA                D9              A\nSão pensamentos soltos, traduzidos em palavras\n         D9\nPra que você possa entender\nA           D9\nO que eu também não entendo\n\n[Segunda Parte]\nC                 C11\nAmar não é ter que ter sempre certeza\nC          C11        C\nÉ aceitar que ninguém é perfeito pra ninguém\n         C11\nÉ poder ser você mesmo e não precisar fingir\nC          C11        F   G\nÉ tentar esquecer, e não conseguir fugir, fugir!\n\n[Primeira Parte]\nA               D9\nJá pensei em te largar\n         A\nJá olhei tantas vezes pro lado\n       D9\nMas quando penso em alguém\n     A\nÉ por você que fecho os olhos\n     D9\nSei que nunca fui perfeito\n   A\nMas com você eu posso ser\n   D9\nAté eu mesmo\n\n[Refrão]\nF        Em      Dm7      C\nAgora o que vamos fazer, eu também não sei\nF   Em    Dm7        C     C/E\nAfinal, será que amar é mesmo tudo\nF        Em    Dm7\nSe isso não é amor, o que mais pode ser\nF        Em    Dm7     E\nTô aprendendo também`;
+
+const C_PENSANDO = `[Verso]\nG               G5+          G\nEu estou pensando em você\n        G5+          Em\nPensando em nunca mais\n     A7        Em\nPensar em te esquecer\n         A7          Am7\nPois quando penso em você\n         D7(9-)     G\nÉ quando não me sinto só\n\n        G5+          G\nCom minhas letras e canções\n        G5+          Em\nCom o perfume das manhãs\n     A7        Em\nCom a chuva dos verões\n         A7          Am7\nCom o desenho das maçãs\n         D7(9-)     G\nE com você me sinto bem\n\n[Refrão]\n         B7          Em\nEu estou pensando em você\nEm7/D\n              A7(9)/C#    C\nPensando em nunca mais te\nD          G\nesquecer`;
+
+const C_UMCERTO = `[Intro]\n(Capo na 2ª casa — cifra em G, soa em A)\nG\n\n[Primeira Parte]\nG        B7      Em\nQuis evitar teus olhos\n         F   Am\nMas não pude reagir\nF          D\nFico à vontade então\nG        B7      Em\nAcho que é bobagem\n         F   Am\nA mania de fingir\nF          D\nNegando a intenção\n\n[Refrão]\nAm              Cm\nQuando um certo alguém\n     G          Em\nCruzou o teu caminho\n     Bm          D\nE mudou a direção\n\n[Segunda Parte]\nG        B7      Em\nChego a ficar sem jeito\n         F   Am\nMas não deixo de seguir\nF          D\nA tua aparição\n\nAm              Cm\nQuando um certo alguém\n     G          Em\nDesperta o sentimento\n     Bm          D\nÉ melhor não resistir\nE se entregar\n\n[Segunda Parte]\nG          Em\nMe dê a mão\n     Bm            D\nVem ser a minha estrela\nG          Em\nComplicação\n     Bm            D\nTão fácil de entender\nG          Em\nVamos dançar\n     Bm            D\nLuzir a madrugada\nG          Em\nInspiração\n     Bm            D\nPra tudo que eu viver`;
+
+// Songs from cifras/Ela
+const C_NEGROGATO = `[Verso]\nDm\nSou o negro gato de arrepiar\nEm toda a minha vida sempre dei azar\nSó mesmo de um telhado, aos outros desacato\n         A#  A   Dm   A#  A  Dm\nEu sou o negro gato, negro gato\nDm\nUma triste história, vou lhes contar\nDepois de ouvi-la, sei que vão chorar\nHá tempos eu não sei o que é um bom prato\n         A#  A   Dm   A#  A  Dm\nEu sou o negro gato, negro gato\nDm\nSete vidas tenho pra dar e vender\nSete chances tenho para viver\nMas se não comer acabo num buraco\n         A#  A   Dm   A#  A  Dm\nSou o negro gato, negro gato\nDm\nUm dia lá no morro, pobre de mim\nQueriam minha pele para tamborim\nApavorado desapareci no mato\n         A#  A   Dm   A#  A  Dm\nEu sou o negro gato, negro gato`;
+
+const C_OUTRAVIDA = `[Intro]\nDm\n\n[Primeira Parte]\nDm\nTalvez não seja nessa vida ainda\n         Am7\nMas você ainda vai ser a minha vida\nBb7M              Am7\nEntão a gente vai fugir pro mar\nBb7M              Am7\nEu vou pedir pra namorar\nBb7M            Am7\nVocê vai me dizer que vai pensar\n     Gm7        C7\nMas no fim vai deixar\n\n[Segunda Parte]\nDm\nTalvez não seja nessa vida ainda\n         Am7\nMas você ainda vai ser a minha vida\nBb7M              Am7\nSem ter mais mentiras pra me ver\nBb7M              Am7\nSem amor antigo pra esquecer\nBb7M              Am7\nSem os teus amigos pra esconder\n     Gm7        C7        Dm\nPode crer, que tudo vai dar certo\n\n[Refrão]\n              Am7\nUê baruieio\n         Bb7M      Am7\nSou pescador, sonhador\n         Bb7M              Am7\nVou dizer pra Deus nosso Senhor\n         Bb7M              Am7\nQue tu és o amor da minha vida\n         Gm7        C7\nPois não dá pra viver nessa vida\nDm\nMorrendo de amor`;
+
+const C_NASUAESTANTE = `[Intro]\nD5  B5/D  D5  B5/D\n\n[Primeira Parte]\nD5\nTe vejo errando e isso não é pecado\n     B5/D\nExceto quando faz outra pessoa sangrar\nD5\nTe vejo sonhando e isso dá medo\n     B5/D\nPerdido num mundo que não dá pra entrar\nD5\nVocê está saindo da minha vida\n     B5/D\nE parece que vai demorar\nD5\nSe não souber voltar ao menos mande notícias\n     B5/D\nCê acha que eu sou louca\n\nA5\nTô aproveitando cada segundo\nAntes que isso aqui vire uma tragédia\n\n[Refrão]\nG5              A5\nE não adianta nem me procurar\n     D5   A/C#   B5\nEm outros timbres, outros risos\nG5              A5\nEu estava aqui o tempo todo\n     B5\nSó você não viu\n\n[Segunda Parte]\nD5\nVocê tá sempre indo e vindo, tudo bem\n     B5/D\nDessa vez eu já vesti minha armadura\nD5\nE mesmo que nada funcione\n     B5/D\nEu estarei de pé, de queixo erguido\nD5\nDepois você me vê vermelha e acha graça\n     B5/D\nMas eu não ficaria bem na sua estante\n\n[Final]\nG5              A5          B5\nSó por hoje não quero mais te ver\nG5              A5          B5\nSó por hoje não vou tomar minha dose de você\nG5              A5          B5\nCansei de chorar feridas que não se fecham\nNão se curam\nG5              A5          B5\nE essa abstinência uma hora vai passar`;
+
+const C_POEMA = `[Intro]\nC  G  Dm7  F  F2\n\n[Primeira Parte]\nC              G\nEu hoje tive um pesadelo\n         Dm7      F\nE levantei atento, a tempo\nC\nEu acordei com medo\n     G\nE procurei no escuro\n         Dm7\nAlguém com seu carinho\n     F\nE lembrei de um tempo\n              F\nNem reclamei abrigo\nC              G\nDo escuro eu via um infinito\n         Dm7\nSem presente\n     F\nPassado ou futuro\nC              G\nSenti um abraço forte\nJá não era medo\nDm7\nEra uma coisa sua\n     F\nQue ficou em mim\n\n[Refrão]\nAm\nPorque o passado\n     Am7/G\nMe traz uma lembrança\n  F              F2\nDo tempo que eu era criança\nAm             Am7/G\nE o medo era motivo de choro\n     F         G\nDesculpa pra um abraço ou consolo\nF              G\nDe repente a gente vê que perdeu\n     Am        D7\nOu está perdendo alguma coisa\nF              G\nMorna e ingênua\n     Am   Am7\nQue vai ficando no caminho\nF              G\nQue é escuro e frio\nMas também bonito\nAm             D7\nPorque é iluminado\nF              G\nPela beleza do que aconteceu\nHá minutos atrás\n\n[Segunda Parte]\nC              G\nHoje eu acordei com medo\n         Dm7\nMas não chorei`;
+
+const C_SANGUELATINO = `[Intro]\nD  G/D\n\n[Primeira Parte]\nD              G/D          D\nJurei mentiras e sigo\n     G/D\nsozinho\nD          G/D    D    G/D\nAssumo os pecados\nA              G\nOs ventos do norte\n     D       G/D\nNão movem moinhos\nD              G/D\nE o que me resta é só um\n     D   G/D\ngemido\n\n[Refrão]\nD              G/D\nMinha vida, meus mortos\n     D       G/D\nMeus caminhos tortos\nD       G/D  D  G/D\nMeu sangue latino\nD       G/D  D  G/D\nMinha alma cativa\n\n[Segunda Parte]\nA              G          D\nRompi tratados, traí os\nG/D\nritos\nD              G/D\nQuebrei a lança\n     D       G/D\nLancei no espaço\nD          G/D  D  G/D\nUm grito, um desabafo\nA              G\nE o que me importa\n     D       G/D\nÉ não estar vencido\n\n[Refrão]\nD              G/D\nMinha vida, meus mortos\n     D       G/D\nMeus caminhos tortos\nD       G/D  D  G/D\nMeu sangue latino\nD       G/D  D  G/D\nMinha alma cativa\n\n[Final]\nG  F#m  Em  D`;
+
+const C_SOZINHO = `[Intro]\nF7M  Em  A\n\n[Primeira Parte]\nD              A       Bm\nÀs vezes, no silêncio da noite\nEm             Em7    A\nEu fico imaginando nós dois\nD              A       Bm\nEu fico ali sonhando acordado juntando\nEm             Em7    A\nO antes, o agora e o depois\n\n[Segunda Parte]\nBm             F#m7   G\nPor que você me deixa tão solto?\nBm             F#m7   Em\nPor que você não cola em mim?\nBm             F#m7   G\nTô me sentindo muito sozinho\n\n[Primeira Parte]\nD              A       Bm\nNão sou nem quero ser o seu dono\nEm             Em7    A\nÉ que um carinho, às vezes, cai bem\nD              A       Bm\nEu tenho os meus segredos e planos\nSecretos\nEm             Em7    A\nSó abro pra você, mais ninguém\n\n[Segunda Parte]\nBm             F#m7   G\nPor que você me esquece e some?\nBm             F#m7   Em\nE se eu me interessar por alguém?\nBm             F#m7   G\nE se ela, de repente, me ganha?\n\n[Refrão]\nD\nQuando a gente gosta\n     A          Bm\nÉ claro que a gente cuida\nEm\nFala que me ama\n     Em7        C\nSó que é da boca pra fora\nD\nOu você me engana\n     A     Bm  G\nOu não está madura\n     A          D\nOnde está você agora?`;
+
+const C_SOSEIDANCAR = `[Primeira Parte]\nF6              D/F#\nVocê me chamou pra dançar aquele dia\nF6              D/F#\nMas eu nunca sei rodar\nF6              D/F#\nCada vez que eu girava parecia\nF6              D/F#\nQue a minha perna sucumbia de agonia\nF6              D/F#\nEm cada passo que eu dava nessa dança\nF6              D/F#\nIa perdendo a esperança\nF6              D/F#\nVocê sacou a minha esquizofrenia\nF6              D/F#\nE maneirou na condução\nF6              D/F#\nToda vez que eu errava cê dizia\nF6              D/F#\nPra eu me soltar porque você me conduzia\nF6              D/F#\nMesmo sem jeito eu fui topando essa parada\nF6              D/F#\nE no final achei tranquilo\n\n[Refrão]\nDm   Dm7M  Dm7        C9/D\nSó sei dançar com você\nBb        Gm11    C11\nIsso é o que o amor faz\nDm   Dm7M  Dm7        C9/D\nSó sei dançar com você\nBb        Gm11    C11\nIsso é o que o amor faz`;
+
+const C_VAMOSFUGIR = `[Intro]\nF#m  E  F#m  E\n\n[Primeira Parte]\nA              E4\nVamos fugir deste lugar, baby\n     F#m\nVamos fugir\n     D\nTô cansado de esperar\nE              F#m\nQue você me carregue\nA\nVamos fugir\n     E4\nPra outro lugar, baby\n     F#m\nVamos fugir\n     D\nPra onde quer que você vá\nE              F#m\nQue você me carregue\n\n[Refrão]\n              A\nPois diga que irá\n     E    D\nIrajá, Irajá\nPra onde eu só veja você\n              A\nVocê veja a mim só\n     E    D\nMarajó, Marajó\nQualquer outro lugar comum\n              A\nOutro lugar qualquer\n     E    D\nGuaporé, Guaporé\nQualquer outro lugar ao sol\n              A\nOutro lugar ao sul\n     E    D\nCéu azul, Céu azul\nOnde haja só o meu corpo nu\nJunto ao seu corpo nu`;
+
+const C_MALANDRAGEM = `[Intro]\nDm  Bb  C\n\n[Primeira Parte]\nDm\nQuem sabe eu ainda\n              C\nSou uma garotinha\nGm\nEsperando o ônibus\n     Dm\nDa escola sozinha\nCansada com minhas\n     C\nMeias três quartos\nGm              Dm\nRezando baixo pelos cantos\n     C       Bb\nPor ser uma menina má\nDm\nQuem sabe o príncipe\n     C\nVirou um chato\nGm              Dm\nQue vive dando no meu saco\n     C       Bb\nQuem sabe a vida é não sonhar\n\n[Refrão]\nDm              C\nEu só peço a Deus\n     F       G\nUm pouco de malandragem\nDm              C\nPois sou criança\n     F       G\nE não conheço a verdade\nBb        C\nEu sou poeta e não\n     Dm\nAprendi a amar\nBb        C\nEu sou poeta e não\n     Dm\nAprendi a amar\n\n[Segunda Parte]\n              C\nBobeira é não viver a realidade\nGm\nE eu ainda tenho\n     Dm\nUma tarde inteira\nG       F\nEu ando nas ruas\nC       Dm\nEu troco o cheque\nBb              Dm\nMudo uma planta de lugar\nG       F\nDirijo o meu carro\nC       Dm\nTomo o meu pileque\nBb              Dm\nE ainda tenho tempo pra cantar`;
 
 // Map of specific contents
 const SPECIFIC = {
-  'Garota de Ipanema': C_GAROTA,
-  'Águas de Março': C_AGUAS,
-  'O Que É o Que É': C_OQUE,
-  'Monte Castelo': C_MONTE,
-  'Hallelujah': C_HALLELUJAH,
-  'Imagine': C_IMAGINE,
-  'Asa Branca': C_ASA,
-  'Hey Jude': C_HEY,
-  'Evidências': C_EVIDENCIAS,
-  'Eu Só Quero Um Xodó': C_XODO
+  'Adivinha o Que': C_ADIVINHA,
+  'Toda Forma de Amor': C_TODAFORMA,
+  'Pescador de Ilusões': C_PESCADOR,
+  'Do Seu Lado': C_DOSEULADO,
+  'Fácil': C_FACIL,
+  'Só Hoje': C_SOHOJE,
+  'É Preciso Saber Viver': C_EPRECISO,
+  'Pra Dizer Adeus': C_PRADIZERADEUS,
+  'A Sombra da Maldade': C_SOMBRA,
+  'Tempo Perdido': C_TEMPOPERDIDO,
+  'Será': C_SERA,
+  'Ainda É Cedo': C_AINDACEDO,
+  'Que País É Este': C_QUEPAIS,
+  'Era Um Garoto Que Como Eu Amava Os Beatles e Os Rolling Stones': C_ERAUMGAROTO,
+  'O Que Eu Também Não Entendo': C_TAMBEM,
+  'Pensando Em Você': C_PENSANDO,
+  'Um Certo Alguém': C_UMCERTO,
+  'Negro Gato': C_NEGROGATO,
+  'Outra Vida': C_OUTRAVIDA,
+  'Na Sua Estante': C_NASUAESTANTE,
+  'Poema': C_POEMA,
+  'Sangue Latino': C_SANGUELATINO,
+  'Sozinho': C_SOZINHO,
+  'Só Sei Dançar Com Você': C_SOSEIDANCAR,
+  'Vamos Fugir': C_VAMOSFUGIR,
+  'Malandragem': C_MALANDRAGEM
 };
 
 const RAW_SONGS = [
-  // BLOCO 1 - MPB Clássico
-  ['Garota de Ipanema','Tom Jobim / Vinicius de Moraes','F','Bloco 1','Bossa nova clássica. Ritmo suingado.'],
-  ['Águas de Março','Tom Jobim','G','Bloco 1','Acelerar no final.'],
-  ['O Que É o Que É','Gonzaguinha','G','Bloco 1','Emotiva. Pedir palmas no refrão.'],
-  ['Como Nossos Pais','Belchior','Am','Bloco 1','Intensidade crescente.'],
-  ['Tocando em Frente','Almir Sater / Renato Teixeira','G','Bloco 1','Boa para abertura.'],
-  ['Corcovado','Tom Jobim','C','Bloco 1','Delicada. Voz suave.'],
-  ['Cajuína','Caetano Veloso','D','Bloco 1','Ritmo de baião suave.'],
-  ['Construção','Chico Buarque','F','Bloco 1','Ritmo marcado. Letra poética.'],
-  ['Romaria','Renato Teixeira','G','Bloco 1','Boa para encerrar o bloco.'],
-  ['Panis et Circenses','Os Mutantes','G','Bloco 1','Rock psicodélico MPB.'],
-  // BLOCO 2 - Bossa Nova
-  ['Wave','Tom Jobim','D','Bloco 2','Levada bossa clássica.'],
-  ['Insensatez','Tom Jobim','F','Bloco 2','Melódica e suave.'],
-  ['Desafinado','Tom Jobim','F','Bloco 2','Humor na letra. Atenção às modulações.'],
-  ['Ela é Carioca','Tom Jobim','D','Bloco 2','Suingada e leve.'],
-  ['Meditação','Tom Jobim','G','Bloco 2','Lenta e reflexiva.'],
-  ['O Barquinho','Roberto Menescal','C','Bloco 2','Alegre. Boa para animar.'],
-  ['Samba do Avião','Tom Jobim','C','Bloco 2','Rítmica. Levada sambada.'],
-  ['Felicidade','Tom Jobim','G','Bloco 2','Clássica do carnaval.'],
-  ['Manhã de Carnaval','Luiz Bonfá','Am','Bloco 2','Voz intensa no refrão.'],
-  ['Fotografia','Tom Jobim','G','Bloco 2','Delicada e melódica.'],
-  // BLOCO 3 - Rock Brasileiro
-  ['Monte Castelo','Legião Urbana','Dm','Bloco 3','Poderosa. Crescendo no final.'],
-  ['Será','Legião Urbana','G','Bloco 3','Rock suave. Boa levada.'],
-  ['Pais e Filhos','Legião Urbana','Am','Bloco 3','Emotiva. Longa.'],
-  ['Epitáfio','Titãs','G','Bloco 3','Acústica. Reflexiva.'],
-  ['Que País É Esse','Legião Urbana','Am','Bloco 3','Energia alta.'],
-  ['Eduardo e Mônica','Legião Urbana','G','Bloco 3','Animada. Pedir participação.'],
-  ['Flores','Legião Urbana','G','Bloco 3','Melódica e suave.'],
-  ['Encontros e Despedidas','Milton Nascimento','G','Bloco 3','Emotiva. Fecha bem o bloco.'],
-  ['Coração de Estudante','Milton Nascimento','G','Bloco 3','Hino. Pedir palmas.'],
-  ['Clube da Esquina Nº 2','Milton Nascimento','G','Bloco 3','Lenta. Muito emotiva.'],
-  // BLOCO 4 - Sertanejo Raiz
-  ['Evidências','Chitãozinho e Xororó','G','Bloco 4','Clássico do sertanejo.'],
-  ['Fio de Cabelo','Chitãozinho e Xororó','G','Bloco 4','Emotiva. Muito pedida.'],
-  ['Tristeza do Jeca','Tonico e Tinoco','D','Bloco 4','Raiz. Saudosista.'],
-  ['Mágoas de Caboclo','Tonico e Tinoco','G','Bloco 4','Sertanejo puro.'],
-  ['Luar do Sertão','Catullo da Paixão Cearense','G','Bloco 4','Poesia do sertão.'],
-  ['Saudade de Matão','Tião Carreiro e Pardinho','D','Bloco 4','Viola caipira.'],
-  ['Chico Mineiro','Francisco Ribeiro / Tonico','G','Bloco 4','Clássico. Muito pedido.'],
-  ['A Vida do Viajante','Luiz Gonzaga','G','Bloco 4','Forró. Levada nordestina.'],
-  ['Beijinho Doce','Tonico e Tinoco','G','Bloco 4','Animada. Fecha bem.'],
-  ['Caboclo Sonhador','Léo Canhoto e Robertinho','D','Bloco 4','Raiz sertaneja.'],
-  // BLOCO 5 - Pop Internacional
-  ['Hallelujah','Leonard Cohen','C','Bloco 5','Voz forte no refrão.'],
-  ['Imagine','John Lennon','C','Bloco 5','Hino universal. Muito pedida.'],
-  ['Yesterday','The Beatles','F','Bloco 5','Melódica. Clássico absoluto.'],
-  ['Blackbird','The Beatles','G','Bloco 5','Dedilhado específico.'],
-  ['The Sound of Silence','Simon & Garfunkel','Am','Bloco 5','Crescendo dramático.'],
-  ["Knockin' on Heaven's Door",'Bob Dylan','G','Bloco 5','Simples. Muito conhecida.'],
-  ["Blowin' in the Wind",'Bob Dylan','G','Bloco 5','Folk clássico.'],
-  ['House of the Rising Sun','The Animals','Am','Bloco 5','Arpejo específico.'],
-  ['Wonderful Tonight','Eric Clapton','G','Bloco 5','Romântica. Lenta.'],
-  ['Wish You Were Here','Pink Floyd','G','Bloco 5','Intro de arpejo clássico.'],
-  // BLOCO 6 - Samba e Pagode
-  ['Preciso Me Encontrar','Cartola','G','Bloco 6','Samba suave. Poético.'],
-  ['O Mundo É um Moinho','Cartola','Am','Bloco 6','Profundo. Letra marcante.'],
-  ['As Rosas Não Falam','Cartola','G','Bloco 6','Delicado e emotivo.'],
-  ['Alguém Me Avisou','Dona Ivone Lara','G','Bloco 6','Samba animado.'],
-  ['Sonho Meu','Dona Ivone Lara','Dm','Bloco 6','Suave e melódico.'],
-  ['Coração em Desalinho','Zeca Pagodinho','G','Bloco 6','Pagode animado.'],
-  ['Verdade','Zeca Pagodinho','C','Bloco 6','Lenta e emotiva.'],
-  ['Camarão que Dorme','Zeca Pagodinho','G','Bloco 6','Animada. Participação do público.'],
-  ['Sorriso Negro','Dona Ivone Lara','G','Bloco 6','Festiva e bonita.'],
-  ['A Voz do Morro','Zé Keti','G','Bloco 6','Clássico do samba.'],
-  // BLOCO 7 - Forró
-  ['Asa Branca','Luiz Gonzaga','G','Bloco 7','Hino nordestino. Muito pedida.'],
-  ['Baião','Luiz Gonzaga','G','Bloco 7','Rítmica. Levada característica.'],
-  ['Xote das Meninas','Luiz Gonzaga','Am','Bloco 7','Animada e dançante.'],
-  ['Paraíba','Luiz Gonzaga','G','Bloco 7','Animada. Nordeste forte.'],
-  ['Vozes da Seca','Luiz Gonzaga','Am','Bloco 7','Denuncia. Marcante.'],
-  ['Eu Só Quero Um Xodó','Dominguinhos / Anastácia','G','Bloco 7','Forró animado. Muito pedido.'],
-  ['Forró na Gafieira','Falamansa','G','Bloco 7','Moderno. Dançante.'],
-  ['Minha Sanfona','Falamansa','D','Bloco 7','Homenagem a Gonzaga.'],
-  ['Não Me Deixe Só','Falamansa','G','Bloco 7','Romântico forró.'],
-  ['Rindo à Toa','Falamansa','C','Bloco 7','Alegre. Fecha o bloco.'],
-  // BLOCO 8 - Gospel
-  ['Quão Grande É o Meu Deus','Chris Tomlin','G','Bloco 8','Hino de louvor.'],
-  ['Oceans','Hillsong United','G','Bloco 8','Cresce muito. Forte no final.'],
-  ['Way Maker','Sinach','G','Bloco 8','Muito pedida. Animada.'],
-  ['Reckless Love','Cory Asbury','G','Bloco 8','Lenta e profunda.'],
-  ['Goodness of God','Bethel Music','G','Bloco 8','Emotiva. Congregacional.'],
-  ['A Igreja','Fernandinho','G','Bloco 8','Clássico evangélico.'],
-  ['Tua Graça me Basta','Gabriela Rocha','G','Bloco 8','Lenta e adoração.'],
-  ['Grito de Vitória','Anderson Freire','A','Bloco 8','Animada. Animação total.'],
-  ['Lugar Secreto','Gabriela Rocha','G','Bloco 8','Adoração. Lenta e profunda.'],
-  ['Me Atraiu','Fernandinho','G','Bloco 8','Fecha bem o bloco.'],
-  // BLOCO 9 - Romântico Brasileiro
-  ['Emoções','Roberto Carlos','G','Bloco 9','Clássico absoluto.'],
-  ['Detalhes','Roberto Carlos','G','Bloco 9','Lenta e saudosa.'],
-  ['Esse Cara Sou Eu','Roberto Carlos','G','Bloco 9','Moderado. Muito pedida.'],
-  ['Lady Laura','Roberto Carlos','G','Bloco 9','Animada e dançante.'],
-  ['Se Você Pensa','Roberto Carlos','G','Bloco 9','Baião. Animada.'],
-  ['Por Isso Eu Vim','Fagner','Am','Bloco 9','Emocionante. Nordeste.'],
-  ['Revelação','Fagner','G','Bloco 9','Romântica. Suave.'],
-  ['Morena Tropicana','Alceu Valença','Am','Bloco 9','Animada. Muito conhecida.'],
-  ['Anunciação','Alceu Valença','G','Bloco 9','Alegre. Boa para animar.'],
-  ['Mucuripe','Fagner / Belchior','Am','Bloco 9','Saudosa. Fecha o bloco.'],
-  // BLOCO 10 - Pedidos e Encerramento
-  ['Hey Jude','The Beatles','F','Bloco 10','Hino. Puxar a galera no final.'],
-  ['Let It Be','The Beatles','C','Bloco 10','Clássico. Encerramento perfeito.'],
-  ['Bohemian Rhapsody','Queen','Bb','Bloco 10','Dramática. Muito pedida.'],
-  ['Hotel California','Eagles','Bm','Bloco 10','Intro de arpejo icônico.'],
-  ['Wonderwall','Oasis','Am','Bloco 10','Pop. Muito popular.'],
-  ['Stand By Me','Ben E. King','A','Bloco 10','Soul clássico.'],
-  ['No Woman No Cry','Bob Marley','C','Bloco 10','Reggae suave. Relaxante.'],
-  ['Redemption Song','Bob Marley','G','Bloco 10','Solo violão. Muito emotiva.'],
-  ['Here Comes the Sun','The Beatles','G','Bloco 10','Alegre. Fecha bem o show.'],
-  ['With a Little Help from My Friends','The Beatles','C','Bloco 10','Final épico. Pedir palmas.']
+  // ELE
+  ['Adivinha o Que','Lulu Santos','Ebm','Ele','Rock nacional. Groove marcado.'],
+  ['Toda Forma de Amor','Lulu Santos','G','Ele','Clássico. Refrão de participação.'],
+  ['Pescador de Ilusões','O Rappa','C','Ele','Capo na 1ª casa (soa em Db). Reggae rock.'],
+  ['Do Seu Lado','Jota Quest','G','Ele','Pop rock romântico.'],
+  ['Fácil','Jota Quest','G','Ele','Animada. Refrão fácil de cantar junto.'],
+  ['Só Hoje','Jota Quest','E','Ele','Romântica. Moderada.'],
+  ['É Preciso Saber Viver','Titãs','D','Ele','Clássico. Reflexiva.'],
+  ['Pra Dizer Adeus','Titãs','G','Ele','Refrão forte. Muito pedida.'],
+  ['A Sombra da Maldade','Cidade Negra','Gm','Ele','Reggae. Groove suingado.'],
+  ['Tempo Perdido','Legião Urbana','Em','Ele','Hino do rock nacional. Longa.'],
+  ['Será','Legião Urbana','C','Ele','Clássico. Refrão marcante.'],
+  ['Ainda É Cedo','Legião Urbana','Dm','Ele','Narrativa. Introspectiva.'],
+  ['Que País É Este','Legião Urbana','Em','Ele','Energia alta. Crítica social.'],
+  ['Era Um Garoto Que Como Eu Amava Os Beatles e Os Rolling Stones','Engenheiros do Hawaii','F','Ele','Capo na 1ª casa (soa em F#). Regravação.'],
+  ['O Que Eu Também Não Entendo','Jota Quest','A','Ele','Romântica. Refrão emotivo.'],
+  ['Pensando Em Você','Paulinho Moska','G','Ele','Suave. Voz e violão.'],
+  ['Um Certo Alguém','Lulu Santos','G','Ele','Capo na 2ª casa (soa em A). Romântica.'],
+  // ELA
+  ['Negro Gato','Erasmo Carlos','F','Ela','Clássica. Refrão repetitivo.'],
+  ['Outra Vida','Armandinho','Dm','Ela','Reggae. Levada suave.'],
+  ['Na Sua Estante','Pitty','D','Ela','Rock. Energia alta.'],
+  ['Poema','Ney Matogrosso','C','Ela','Intensa. Dramática.'],
+  ['Sangue Latino','Secos & Molhados','D','Ela','Clássico rock nacional.'],
+  ['Sozinho','Caetano Veloso','D','Ela','Romântica. Refrão marcante.'],
+  ['Só Sei Dançar Com Você','Tulipa Ruiz','F','Ela','Repetitiva. Refrão fácil.'],
+  ['Vamos Fugir','Skank','F#m','Ela','Animada. Muito pedida.'],
+  ['Malandragem','Cássia Eller','Dm','Ela','Clássica. Emotiva.']
 ];
 
 // Build initial songs array
@@ -792,8 +733,7 @@ const INITIAL_SONGS = RAW_SONGS.map(([title,artist,key,block,obs],i)=>({
 const ST_KEY = 'rp_v1';
 let S = {
   songs: [],
-  blocks: ['Bloco 1','Bloco 2','Bloco 3','Bloco 4','Bloco 5',
-           'Bloco 6','Bloco 7','Bloco 8','Bloco 9','Bloco 10'],
+  blocks: ['Ele','Ela'],
   activeId: null,
   view: 'stage',   // 'stage' | 'edit'
   editId: -1,      // -1 = new, else = id
@@ -1218,254 +1158,6 @@ function searchCifraClub(){
   const q=S.search.trim();
   if(!q) return;
   window.open('https://www.cifraclub.com.br/busca/?q='+encodeURIComponent(q),'_blank','noopener');
-}
-
-// ─── IMPORTAR DO CIFRACLUB ────────────────────────────────────────────────────
-
-function openImportModal(){
-  $id('imp-q').value = S.search||'';
-  $id('imp-status').textContent='';
-  $id('btn-import').disabled=false;
-  $id('ov-import').classList.add('open');
-  setTimeout(()=>$id('imp-q').focus(),120);
-}
-
-function slugifyCifra(text){
-  // Substitui caracteres acentuados comuns antes de normalizar
-  const map='àáâãäåaaaaaa,èéêëeeee,ìíîïiiii,òóôõöooooo,ùúûüuuuu,ýyy,ñn,çc'.split(',');
-  let t=text.toLowerCase();
-  // Remove combining marks via charCode filter after NFD
-  t=t.normalize('NFD').split('').filter(c=>{const n=c.charCodeAt(0);return n<0x0300||n>0x036F;}).join('');
-  return t.replace(/[^a-z0-9 -]/g,'').trim().replace(/\s+/g,'-');
-}
-
-function unslugifyCifra(slug){
-  return slug.split('-').map(w=>w?w[0].toUpperCase()+w.slice(1):'').join(' ');
-}
-
-async function fetchWT(url,ms=12000){
-  const ctrl=new AbortController();
-  const t=setTimeout(()=>ctrl.abort(),ms);
-  try{const r=await fetch(url,{signal:ctrl.signal});clearTimeout(t);return r;}
-  catch(e){clearTimeout(t);throw e;}
-}
-
-function isBlockedPage(html){
-  return /Just a moment|cf-browser-verification|Checking your browser|DDoS protection|captcha|Access denied|Acesso negado/i.test(html);
-}
-
-async function fetchViaProxy(url, onStep){
-  const log=onStep||(()=>{});
-  const proxies=[
-    ['corsproxy.io', async()=>{
-      const r=await fetchWT('https://corsproxy.io/?'+encodeURIComponent(url),12000);
-      if(r.ok){const t=await r.text();if(t&&t.length>300&&!isBlockedPage(t))return t;}
-      return null;
-    }],
-    ['allorigins-raw', async()=>{
-      const r=await fetchWT('https://api.allorigins.win/raw?url='+encodeURIComponent(url),15000);
-      if(r.ok){const t=await r.text();if(t&&t.length>300&&!isBlockedPage(t))return t;}
-      return null;
-    }],
-    ['allorigins-json', async()=>{
-      const r=await fetchWT('https://api.allorigins.win/get?url='+encodeURIComponent(url),15000);
-      if(r.ok){const d=await r.json();if(d.contents&&d.contents.length>300&&!isBlockedPage(d.contents))return d.contents;}
-      return null;
-    }],
-    ['codetabs', async()=>{
-      const r=await fetchWT('https://api.codetabs.com/v1/proxy?quest='+encodeURIComponent(url),12000);
-      if(r.ok){const t=await r.text();if(t&&t.length>300&&!isBlockedPage(t))return t;}
-      return null;
-    }],
-    ['thingproxy', async()=>{
-      const r=await fetchWT('https://thingproxy.freeboard.io/fetch/'+url,12000);
-      if(r.ok){const t=await r.text();if(t&&t.length>300&&!isBlockedPage(t))return t;}
-      return null;
-    }],
-    ['bridged', async()=>{
-      const r=await fetchWT('https://cors.bridged.cc/'+url,12000);
-      if(r.ok){const t=await r.text();if(t&&t.length>300&&!isBlockedPage(t))return t;}
-      return null;
-    }],
-  ];
-  for(const[name,fn] of proxies){
-    log(`⏳ Tentando via ${name}…`);
-    try{const result=await fn();if(result)return result;}catch(e){}
-  }
-  throw new Error('__PROXY_FAIL__');
-}
-
-function parseCifraClubPage(html, sourceUrl){
-  const doc=new DOMParser().parseFromString(html,'text/html');
-
-  // Título
-  let title='';
-  for(const s of ['h1.t1','h1.song-name','h1[class*="song"]','h1[class*="title"]','h1','[itemprop="name"]','.song-name','.t1']){
-    const el=doc.querySelector(s);
-    if(el?.textContent?.trim()){title=el.textContent.trim();break;}
-  }
-
-  // Artista
-  let artist='';
-  for(const s of ['h2.t3 a','.t3 a','[itemprop="byArtist"] a','h2 a','.art_artist a','.artist a','a[href*="/artista/"]','a[class*="artist"]']){
-    const el=doc.querySelector(s);
-    if(el?.textContent?.trim()){artist=el.textContent.trim();break;}
-  }
-
-  // Fallback via URL
-  const clean=sourceUrl.replace(/https?:\/\/www\.cifraclub\.com\.br\//,'').replace(/\/$/,'');
-  const parts=clean.split('/');
-  if(!title&&parts[1]) title=unslugifyCifra(parts[1]);
-  if(!artist&&parts[0]) artist=unslugifyCifra(parts[0]);
-
-  // Tom
-  let key='G';
-  for(const s of ['.tom-original','#cifra_tom','.cifra_tom','[class*="cifra_tom"]','[class*="tom-original"]','[class*="key"]','[data-key]']){
-    const el=doc.querySelector(s);
-    if(el){
-      const m=(el.getAttribute('data-key')||el.textContent||'').match(/[A-G][#b]?m?/);
-      if(m){key=m[0];break;}
-    }
-  }
-
-  // Conteúdo — procura o <pre> com as cifras
-  let content='';
-  const preSels=[
-    '.art_music-style pre',
-    '.g-tablaturas pre',
-    '#cifra_tablaturas pre',
-    '.cifra_tablatura pre',
-    '.cifra pre',
-    '.g-cifra pre',
-    '.song-content pre',
-    '.cifra-tabs-wrap pre',
-    '#song-content pre',
-    '#cifra pre',
-    'article pre',
-    'main pre',
-    'pre'
-  ];
-  for(const s of preSels){
-    const el=doc.querySelector(s);
-    if(el){
-      const txt=el.textContent
-        .replace(/\r\n/g,'\n').replace(/\r/g,'\n')
-        .replace(/^\n+/,'').replace(/\n{3,}/g,'\n\n').trim();
-      if(txt.length>40){content=txt;break;}
-    }
-  }
-
-  // Fallback: tenta pegar de script JSON-LD
-  if(!content){
-    const scripts=doc.querySelectorAll('script[type="application/ld+json"]');
-    for(const sc of scripts){
-      try{
-        const j=JSON.parse(sc.textContent);
-        if(j.description&&j.description.length>40){content=j.description;break;}
-      }catch(e){}
-    }
-  }
-
-  if(!content) content='(Cifra não encontrada automaticamente.\nTente colar a URL direta do CifraClub ou adicione o conteúdo manualmente.)';
-
-  return {title,artist,key,content};
-}
-
-async function startImport(){
-  const query=($id('imp-q').value||'').trim();
-  if(!query){toast('Digite o artista e a música.','err');return;}
-
-  const btn=$id('btn-import');
-  const status=$id('imp-status');
-  btn.disabled=true;
-
-  const setStatus=t=>{status.textContent=t;};
-
-  try{
-    let html,sourceUrl;
-    const log=t=>setStatus(t);
-
-    if(/^https?:\/\//i.test(query)){
-      sourceUrl=query.replace(/#.*$/,'');
-      html=await fetchViaProxy(sourceUrl,log);
-
-    } else if(query.includes(' - ')){
-      const dash=query.indexOf(' - ');
-      const artistPart=query.slice(0,dash).trim();
-      const titlePart=query.slice(dash+3).trim();
-      const primaryArtist=artistPart.split(/\s*[\/,&]\s*|\s+feat\.?\s+/i)[0].trim();
-      sourceUrl=`https://www.cifraclub.com.br/${slugifyCifra(primaryArtist)}/${slugifyCifra(titlePart)}/`;
-      setStatus('⏳ Construindo URL…');
-      try{
-        html=await fetchViaProxy(sourceUrl,log);
-        if(html.length<800||/<title>[^<]*404/i.test(html)||/Página não encontrada/i.test(html))
-          throw new Error('not found');
-      }catch(err){
-        if(err.message==='__PROXY_FAIL__') throw err;
-        setStatus('🔍 URL não encontrada, buscando alternativa…');
-        sourceUrl=await cifraSearch(query,log);
-        if(!sourceUrl) throw new Error('Música não encontrada no CifraClub com esse nome. Tente a URL direta.');
-        html=await fetchViaProxy(sourceUrl,log);
-      }
-
-    } else {
-      setStatus('🔍 Pesquisando no CifraClub…');
-      sourceUrl=await cifraSearch(query,log);
-      if(!sourceUrl) throw new Error('Não encontrado. Use "Artista - Título" ou cole a URL direta.');
-      html=await fetchViaProxy(sourceUrl,log);
-    }
-
-    if(!html||html.length<500) throw new Error('Conteúdo inválido. Use a URL direta do CifraClub.');
-
-    const parsed=parseCifraClubPage(html,sourceUrl);
-    closeModal('ov-import');
-    S.editId=-1; S.view='edit';
-    render();
-    requestAnimationFrame(()=>{
-      $id('f-title').value=parsed.title;
-      $id('f-artist').value=parsed.artist;
-      if(KEYS.includes(parsed.key)) $id('f-key').value=parsed.key;
-      $id('f-block').value=S.blocks[0]||'Bloco 1';
-      $id('f-obs').value='Importado do CifraClub';
-      $id('f-content').value=parsed.content;
-      $id('f-content').scrollTop=0;
-      toast('✓ Cifra importada! Revise e salve.','ok');
-    });
-
-  }catch(e){
-    if(e.message==='__PROXY_FAIL__'){
-      // Todos os proxies falharam — mostra fallback manual
-      const searchQ=encodeURIComponent(query);
-      status.innerHTML=
-        `<div style="color:var(--danger);margin-bottom:10px">⚠️ Servidores de acesso temporariamente indisponíveis.</div>`+
-        `<div style="font-size:12px;line-height:1.8;color:var(--muted)">`+
-        `<strong style="color:var(--tx)">O que fazer:</strong><br>`+
-        `1. <a href="https://www.cifraclub.com.br/busca/?q=${searchQ}" target="_blank" rel="noopener" style="color:var(--accent)">Abrir CifraClub ↗</a>, encontre a música e copie a URL da página<br>`+
-        `2. Cole a URL no campo acima e clique novamente em Importar<br>`+
-        `3. Ou <button class="btn btn-ghost btn-sm" style="padding:2px 8px;font-size:11px" onclick="closeModal('ov-import');openEdit(null)">adicione manualmente</button>`+
-        `</div>`;
-    } else {
-      status.innerHTML=`<span style="color:var(--danger)">❌ ${esc(e.message||'Erro desconhecido.')}</span>`;
-    }
-  }finally{
-    btn.disabled=false;
-  }
-}
-
-async function cifraSearch(query,log){
-  const searchUrl='https://www.cifraclub.com.br/busca/?q='+encodeURIComponent(query);
-  const html=await fetchViaProxy(searchUrl,log);
-  const doc=new DOMParser().parseFromString(html,'text/html');
-  // Usa getAttribute para pegar o href bruto (não resolvido pelo browser)
-  // Padrão: /artista/musica/ ou URL completa
-  const patRel=/^\/[a-z0-9-]+\/[a-z0-9-]+\/?$/;
-  const patFull=/^https?:\/\/www\.cifraclub\.com\.br\/[a-z0-9-]+\/[a-z0-9-]+\/?$/;
-  for(const a of doc.querySelectorAll('a[href]')){
-    const href=a.getAttribute('href')||'';
-    if(patFull.test(href)) return href;
-    if(patRel.test(href)) return 'https://www.cifraclub.com.br'+href;
-  }
-  return null;
 }
 
 // ─── KEYBOARD ────────────────────────────────────────────────────────────────
