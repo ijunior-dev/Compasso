@@ -89,7 +89,7 @@
 
 :root {
   --bg:#0e0f14; --sb:#13141a; --card:#1a1b22; --brd:#252630;
-  --tx:#d0d2e0; --muted:#5a5c70; --accent:#6b9fff; --chord:#ffd166;
+  --tx:#d0d2e0; --muted:#5a5c70; --accent:#6b9fff; --chord:#ff9f43;
   --sec:#a78bfa; --danger:#e05c5c; --ok:#4caf82; --warn:#f0a855;
   --sbw:300px; --tbh:52px; --bnh:52px; --fscale:1;
   --mono:'Courier New',Consolas,Monaco,monospace;
@@ -148,7 +148,7 @@
 .p3-font-label{font-size:15px;font-weight:700;color:var(--accent);min-width:36px;text-align:center}
 [data-theme=light]{
   --bg:#f0f2f8; --sb:#fff; --card:#fff; --brd:#dde0ec;
-  --tx:#1a1b22; --muted:#6b6f88; --chord:#7a5c00; --sec:#6d28d9;
+  --tx:#1a1b22; --muted:#6b6f88; --chord:#c2410c; --sec:#6d28d9;
 }
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:var(--ui);background:var(--bg);color:var(--tx);height:100vh;height:100dvh;overflow:hidden;
@@ -359,8 +359,6 @@ body.stage #stage-nav-bar{display:flex}
     column-count:2;
     column-gap:3em;
     column-rule:1px solid var(--brd);
-    white-space:pre-wrap;
-    overflow-wrap:break-word;
   }
   .cs-section{break-after:avoid}
 }
@@ -374,8 +372,6 @@ body.stage #stage-nav-bar{display:flex}
     column-gap:2.2em;
     column-rule:1px solid var(--brd);
     font-size:13px;
-    white-space:pre-wrap;
-    overflow-wrap:break-word;
   }
   .cs-section{break-after:avoid}
 }
@@ -388,8 +384,6 @@ body.stage #stage-nav-bar{display:flex}
     column-gap:2em;
     column-rule:1px solid var(--brd);
     font-size:12px;
-    white-space:pre-wrap;
-    overflow-wrap:break-word;
   }
   .cs-section{break-after:avoid}
 }
@@ -698,6 +692,25 @@ const C_DEJANEIRO = `[Intro]\nA  A2  D  D2  (2x)\n\n[Primeira Parte]\nA         
 
 const C_NAQUELAMESA = `[Intro]\nDm9/A  Bb11+  E7/B  Gm/Bb  A7\n\n[Primeira Parte]\n              Dm\nNaquela mesa ele sentava sempre\n              Gm\nE me dizia sempre o que é viver melhor\nNaquela mesa ele contava histórias\n              A7\nQue hoje na memória\n              Dm\nEu guardo e sei de cor\nNaquela mesa ele juntava a gente\n     D7                Gm\nE contava contente o que fez de manhã\n         Dm\nE nos seus olhos era tanto brilho\n     A7\nQue mais que seu filho\n     Dm\nEu fiquei seu fã\n\n[Segunda Parte]\nEu não sabia que doía tanto\nUma mesa num canto\n     Gm\nUma casa e um jardim\nSe eu soubesse o quanto dói a vida\n     A7            Dm\nEssa dor tão doída não doía assim\n\nAgora resta uma mesa na sala\n         D7\nE hoje ninguém mais fala\n     Gm\nNo seu bandolim\n         Dm\nNaquela mesa tá faltando ele\n     A7             Dm\nE a saudade dele tá doendo em mim\n     Gm             Dm\nNaquela mesa tá faltando ele\n     A7             Dm\nE a saudade dele tá doendo em mim`;
 
+// Songs from cifras/Ela — out/2026
+const C_UMDIAADEUS = "Bm7   A    Bm7         Em7      Bm\nSó  você pra dar a minha vida direção\n   D      E      F#7            Bm7\nO tom, a cor,  me fez  voltar a ver\n  A    Bm7        Em7           G7M\nA luz, estrela no deserto a me guiar\n  E/G#    A       A#°\nFarol  no mar, da incerteza\n\n   B           E/G#   B           E\n    Um dia um adeus   eu indo embora\n\n  D#         G#m    C#\n   Quanta loucura  por tão pouca\n   F#\naventura\n\n    B        E      B            E\n    Agora entendo  que andei perdido\n\n  D#              G#m  C#\n   O que é que eu faço pra  você\nF#7/4/9\nme\n   F#\nPerdo-ar\n\nBm7     A   Bm7         Em7\nAh! Que bom seria se eu pudesse te\n  Bm\nabraçar\n   D       E       F#7          Bm\nBeijar, sentir como a primeira vez\n\n   A     Bm7         Em7        Bm\nTe dar o carinho que você  merece ter\n   D       E           F#7\nEu sei  te amar, como ninguém  mais\n\n Bm    A        G         A\n   Ninguém mais como ninguém jamais\n     Bm\n te amou\n\n  A              Em7       A\nNinguém jamais    te amou,  te amou\n Bm       A     Em7         A\n   Ninguém mais    como ninguém jamais\nD/F#\nte\n   G7M\nAmou\n   D/F#       Em7        F#7\nNinguém jamais    te amou, como eu Como\nBm7\n eu\n\n( A G A Bm A G )";
+
+const C_DETANTOAMOR = "[Intro]\nG  D  Dm  E  D/F#  E/G#\nAm  Am7/G  D  D4  D  D9\n\n[Primeira Parte]\nG          D/F#           Dm/F\nAh, eu vim aqui amor só pra me despedir\nE               D/F# E/G#      Am\nE as últimas pala__vras desse\n      Am7/G\nnosso amor\n      D             D4  D  D9\nVocê vai ter que ouvir\n\n G     D/F#\nMe perdi de tanto amor, ah, eu\n  Dm/F\nenlouqueci\n     E          D/F#  E/G# Am\nNinguém podia amar assim e eu amei\nAm7/G\n\n     D                C               G\nE devo confessar, aí foi que eu errei\n\n[Refrão]\nF#                   Bm\n   Vou te olhar mais uma vez\nF#               Bm\n   Na hora de dizer adeus\nE                 Am      Am7/G\n  Vou chorar mais uma vez\nE                          Am  Am7/G\n  Quando olhar nos olhos seus\n           D   D4  D  D9\nNos olhos seus\n\n[Segunda Parte]\nG            D/F#\nAh, saudade vai chegar\n     Dm/F\nE por favor meu bem\n    E          D/F#  E/G#  Am\nMe deixe pelo menos só te ver passar\n Am7/G\n\nD                     C               G\nEu nada vou dizer perdoa se eu chorar\n\n[Solo]\nF#  Bm  F#  Bm  Bm7/A\n\n[Refrão]\nE                 Am      Am7/G\n  Vou chorar mais uma vez\nE                          Am  Am7/G\n  Quando olhar nos olhos seus\n           D   D4  D  D9\nNos olhos seus\n\n[Segunda Parte]\n(repete Segunda Parte)";
+
+const C_CHOVECHUVA = "[Intro]\nAm7  Dm7  Cm7  Am7\nAm7  Dm7  Cm7  Am7\n\n[Refrão]\n        D7(9)             Am7\nChove chuva, chove sem parar\n        D7(9)             Am7  A7(13-)\nChove chuva, chove sem parar\n\n[Primeira Parte]\n                        D7(9)\nPois eu vou fazer uma prece\n     G7            Am7  A7(13-)\nPra Deus nosso senhor\n             D7(9)     G7\nPra chuva parar de molhar\n               Am7\nO meu divino amor\n  D7(9)      Am7\nQue é muito lindo\n   D7(9)          Am7\nÉ mais que o infinito\n   A7(13-)  Dm7(9)\nÉ puro e   belo\n    G7            Am7\nInocente como a flor\n       A7(13-)    D7(9)\nPor favor chuva ruim\n           G7                Am7\nNão molhe mais o meu amor assim\nA7(13-)                   D7(9)\n        Por favor chuva ruim\n           G7                Am7\nNão molhe mais o meu amor assim\nA7(13-)\n\n[Refrão]\n(repete Refrão)\n\n[Primeira Parte]\n(repete Primeira Parte)\n\n[Refrão]\n(repete Refrão)\n\n[Final]\nD7(9)  Am7  D7(9)  Am7\nD7(9)  Am7  D7(9)  Am7\nD7(9)  Am7  D7(9)  Am7\nD7(9)  Am7  D7(9)  Am7\nE|------5-------5---------------0--5-------|";
+
+const C_PALPITE = "[Intro]\nE  F#/E  A2\nE  F#/E  A2  E\n\n[Primeira Parte]\nE\n  Tô com saudade de você\n                F#/E\nDebaixo do meu cobertor\nA2                Am6\n   E te arrancar suspiros\n      E   (Frase 1)\nFazer amor\n\nTô com saudade de você\n      F#/E\nNa varanda em noite quente\nA2          Am6                C#m7\n   E o arrepio frio que dá na gente\n\n[Pré-Refrão]\n             A2\nTruque do desejo\n           C#m7            A2\nGuardo na boca o gosto do beijo\nC7M          D2            C7M\n    Eu sinto a falta de você\n       D2\nMe sinto só\n\n[Refrão]\n   E                 F#/E\nE aí, será que você volta?\n              A2   Am6\nTudo à minha volta\n    E    (Frase 1)\nÉ triste\n                    F#/E\nE aí, o amor pode acontecer\n          A2          E   (Frase 1)\nDe novo pra você, palpite\n\n[Segunda Parte]\nE\n  Tô com saudade de você\n       F#/E\nDo nosso banho de chuva\n A2                Am6\nDo calor da minha pele\n           E  (Frase 1)\nDa língua tua\n\nTô com saudade de você\n      F#/E\nCensurando o meu vestido\nA2               Am6\n   As juras de amor\n            C#m7\nAo pé do ouvido\n\n[Pré-Refrão]\n(repete Pré-Refrão)\n\n[Refrão]\n(repete Refrão)\n\n[Solo]\nE  F#/E  A2  E\nE  F#/E  A2  E\n\n[Pré-Refrão]\nC7M          D2            C7M\n    Eu sinto a falta de você\n       D2\nMe sinto só\n\n[Refrão Final]\n   E                 F#/E\nE aí, será que você volta?\n              A2   Am6\nTudo à minha volta\n    E    (Frase 1)\nÉ triste\n                    F#/E\nE aí, o amor pode acontecer\n          A2          E   (Frase 1)\nDe novo pra você, palpite\n\n   E                 F#/E\nE aí, será que você volta?\n              A2   Am6     E\nTudo à minha volta     é triste\n                    F#/E\nE aí, o amor pode acontecer\n          A2          E   (Frase 1)\nDe novo pra você, palpite\n\n[Final]\nE  (Frase 1)\nE6";
+
+const C_AGUASDEMARCO = "  A/G                        D/F#\nÉ pau, é pedra, é o fim do caminho\n              Dm/F                A/E\nÉ um resto de toco, é um pouco sozinho\n             Eb7/5-               D7+\nÉ um caco de vidro, é a vida, é o sol\n               G7/13\nÉ a noite, é a morte, é um laço, é o\n  A7+\nanzol\n             A7                 D/F#\nÉ peroba do campo, é o nó da madeira\n            Dm/F             A\nCaingá, candeia, é Matita Pereira\n             A/G                   D/F#\nÉ madeira de vento, tombo da ribanceira\n                  Dm/F\nÉ um mistério profundo\n                       A\nÉ um queira ou não queira\n              A/G\nÉ um vento ventando\n               D/F#               Dm/F\nÉ o fim da ladeira É a viga, é o vão\n              A/E                Eb7/5-\nFesta da cumieira  É a chuva chovendo\n                D7+              G7/13\n, É conversa ribeira das águas de março\n                A7+\n É o fim da canseira\n             A/G                   D/F#\nÉ o pé, é o chão, é a marcha estradeira\n              Dm/F                A\nPassarinho na mão, pedra na atiradeira\n              A7                D7+\nÉ uma ave no céu, é uma ave no chão\n                   Dm7\nÉ um regato, é uma fonte\n                A7+              A/G\nÉ um pedaço de pão É o fundo do poço\n             D/F#\nÉ o fim do caminho\n               Dm/F\nNo rosto um desgosto, é um pouco\n    A/E\nsozinho\n                    Eb7/5-\nÉ um estrepe, é um prego, é uma ponta,\n       D7+\n é um ponto\n                Dm7\nÉ um pingo , pingado ,é uma conta ,é\n    A7+\num conto\n                  A/G\nÉ um peixe, é um gesto, é uma prata\n      D/F#\nbrilhando\n             Dm/F                  A\nÉ a luz da manhã, é o tijolo chegando\n               A/G               D/F#\nÉ a lenha, é o dia, é o fim da picada\n               Dm/F\nÉ a garrafa de cana, o estilhaço na\n    A/E\nestrada\n                Em7       A7       D6\nÉ o projeto da casa, é o corpo na cama\n               Dm7                 A7+\nÉ o carro enguiçado, é a lama, é a lama\n\n                   A/G\nÉ um passo, é uma ponte, é um sapo, é\n  D/F#\numa rã\n              Dm/F             A/E\nÉ um resto de mato, na luz da manhã\n                A/G             D/F#\nSão as águas de março fechando o verão\n                Dm/F            A\nÉ a promessa de vida no teu coração\n                   A7            D7+\nÉ uma cobra, é um pau, é João, é José\n                Dm7                A7+\nÉ um espinho na mão, é um corte no pé\n                A/G             D/F#\nSão as águas de março fechando o verão\n                Dm/F            A\nÉ a promessa de vida no teu coração\n  A/G                        D/F#\nÉ pau, é pedra, é o fim do caminho\n              Dm/F                A/E\nÉ um resto de toco, é um pouco sozinho\n                     A7\nÉ um passo, é uma ponte, é uma sapo ,\n   D7+\numa rã\n              Dm7                  A7+\nÉ um Belo Horizonte, é uma febre terçã\n                A/G             D/F#\nSão as águas de março fechando o verão\n                Dm/F            A\nÉ a promessa de vida no teu coração";
+
+const C_NADAMAIS = "  D                        Bm7   Em\nSinto quando alguém te interessa\n          Em7            A7\nmesmo quando finges que não vês\nEm        Em7M     Em7  A7       D\nSe desapareces numa festa, eu já\n    A11/D  D\nsei\nD                           Bm7\nNão te quero ouvir falar do tempo\nEm          Em7         A7\nse eu só pergunto onde vais\nEm             Em7M          Em7\nMas se quiser saber se voltas logo\nA7             D          D7\n     you don't know, nada mais\n\nG6                          Gm6\nVão dizer que são tolices,  que podemos\n ser felizes\n    F#m                 B7\nMas tudo que eu sei não dá pra\ndisfarçar\n\n      Em7    F#m7  Gm7       A7  D\nDessa vez    doeu             demais\n  B7(4)\n\n    Em7   F#m7   Gm7      A7  D\nAmanhã    será            jamais\nBm7  G7M  Em7  A7\n\nD                          Bm7   Em\nOnde a gente vai tem uns amigos que\n         Em7       A7\n você precisa visitar\nEm         Em7M           Em7  A7\nSe  não sou feliz são só ciúmes,\n      D    A11/D  D\nnada mais\nBm7\nMais de uma vez flagrei seus lábios\nEm             Em7              A7\nNa intenção do nome de outro alguém\nEm            Em7M            Em7  A7\nMas se quiser saber o que eles calam\n      D            D7\nVocê diz:  tudo bem\n\n G6                          Gm6\nVão dizer que são tolices,  que podemos\n ser felizes\n    F#m                 B7\nMas tudo que eu sei não dá pra\ndisfarçar\n      Em7    F#m7   Gm7       A7  D\nDessa vez    doeu\n   B7(4)\ndemais\n    Em7    F#m7  Gm7      C  Bb5+\nAmanhã     será           jamais\nCm7  Dm7  G7\n\nC7M                         Cm7\nVão dizer que são tolices,  que podemos\n ser felizes\n   Bm7                 E7\nMas tudo que eu sei não dá pra\ndisfarçar\n     Am7    Bm7   Cm7       D7   G\nDessa vez    doeu\n  E7(4) E7\ndemais\n    Am7    Bm7   Cm7       D7    G\nAmanhã     será           jamais\nEm7  C7M  Am7  D7  E6";
+
+const C_VOCEELINDA = "[Intro]\nA7M\n\n[Primeira Parte]\n F#m7            C#m7\nFonte de mel nos olhos de gueixa\nD7M          G#m7  G#°  C#7(9-)\n    Kabuki, másca_ra\n  D7M(9)\nChoque entre o azul\n     D#m7(5-)  G#7\nE o cacho de acácias\n C#m7     F#7    Bm7    E7\nLuz das acácias você é mãe do sol\nF#m7           C#m7\nA sua coisa é toda tão certa\nD7M           G#m7  G#°  C#7(9-)\n    Beleza esper___ta\n D7M(9)          D#m7(5-) G#7\nVocê me deixa a rua    deserta\n  C#m7      F#7  Bm7      E7\nQuando atravessa e não olha pra trás\n\n[Refrão]\nA7M          C#m7\n    Linda e sabe viver\nD7M                Bm7\n    Você me faz feliz\nDm7            G7\nEsta canção é só pra dizer\n   A7M\nE diz\n              C#m7\nVocê é linda mais que demais\nD7M               Bm7\n    Você é linda sim\nDm7              G7\nOnda do mar do amor\n              A7M\nQue bateu em mim\n\n[Segunda Parte]\n F#m7         C#m7\nVocê é forte dentes e músculos\nD7M           G#m7  G#°  C#7(9-)\n    Peitos e lábios\n D7M(9)       D#m7(5-) G#7\nVocê é forte letras e músicas\n C#m7     F#7\nTodas as músicas\n  Bm7      E7\nQue ainda hei de ouvir\n\n F#m7       C#m7\nNo Abaeté areias e estrelas\nD7M               G#m7  G#°  C#7(9-)\n    Não são mais belas\n D7M(9)         D#m7(5-)   G#7\nDo que você mulher das estrelas\n C#m7       F#7\nMina de estrelas\n Bm7        E7\nDiga o que você quer\n\n[Refrão]\nA7M                 C#m7\n    Você é linda e sabe viver\nD7M                Bm7\n    Você me faz feliz\nDm7            G7\nEsta canção é só pra dizer\n   A7M\nE diz\n              C#m7\nVocê é linda mais que demais\nD7M               Bm7\n    Você é linda sim\nDm7              G7\nOnda do mar do amor\n              A7M\nQue bateu em mim\n\n[Terceira Parte]\n F#m7           C#m7\nGosto de ver você no seu ritmo\nD7M               G#m7  G#°  C#7(9-)\n    Dona do carnaval\n D7M(9)          D#m7(5-)  G#7\nGosto de ter sentir seu estilo\nC#m7      F#7\nIr no seu íntimo\n Bm7      E7\nNunca me faça mal\n\n[Refrão]\nA7M               C#m7\n    Você é linda mais que demais\nD7M               Bm7\n    Você é linda sim\nDm7              G7\nOnda do mar do amor que bateu\n    A7M\nEm mim\n                C#m7\nVocê é linda e sabe viver\nD7M                Bm7\n    Você me faz feliz\nDm7            G7             A7M\nEsta canção é só pra dizer e diz";
+
+const C_TODOHOMEM = "[Intro]\nC  Am  C  Em\n\n[Primeira Parte]\n   C                  Am\nO sol manhã e flor e sal\n    C         Em\nE areia no batom\n   C                  Am\nFarol, saudades no varal\n    C               Em\nVermelho, azul, marrom\n\n    C                Am\nEu sou cordão umbilical\n     C            Em\nPra mim nunca ta bom\n     C                    Am\nE o sol queimando meu jornal\n       C                   Em\nMinha voz, minha luz, meu som\n\n[Refrão]\n      C        D           G   C\nTodo homem precisa de uma mãe\n               D           G\nTodo homem precisa de uma mãe\n\n[Segunda Parte]\n   C               Am\nO céu espuma de maçã\n    C            Em\nBarriga, dois irmãos\n   C                Am\nO meu cabelo negra lã\n   C               Em\nNariz, e rosto, e mãos\n   C                        Am\nO mel, a prata, o ouro e a rã\n   C          Em\nCabeça e coração\n   C                 Am\nO céu se abre de manhã\n      C                 Em\nMe abrigo em colo, em chão\n\n[Refrão]\n      C        D           G   C\nTodo homem precisa de uma mãe\n               D           G\nTodo homem precisa de uma mãe\n\n      C        D           G   C\nTodo homem precisa de uma mãe\n               D           G\nTodo homem precisa de uma mãe";
+
+const C_WAVE = "[Intro]\nDm7  G/D  Dm7  G/D\nDm7  G/D  Dm7\nDm7  G/D  Dm7  G/D\nDm7  G/D  Dm7\nDm7  G/D  Dm7  G/D\nDm7  G/D  Dm7\n\n[Primeira Parte]\n           D7M(9)\nVou te contar\n   Bbº                 Am7  D7(9-)\nOs olhos já não podem ver\n            G7M      Gm6\nCoisas que só o coração\n           F#7(13)  F#7(13-)  B7(9)\nPode entender\n      B7(9-)   E7(9)\nFundamental é mesmo o amor\n        Bb7(13)   A7(13-)\nÉ impossível ser feliz\n   Dm7  G/D  Dm7  G/D\nSozinho\n\n           D7M(9)\nO resto é mar\n   Bbº                 Am7  D7(9-)\nÉ tudo que não sei contar\n            G7M           Gm6\nSão coisas lindas que eu tenho\n        F#7(13)  F#7(13-)  B7(9)\nPra te dar\n        B7(9-)      E7(9)\nVem de mansinho à brisa e me diz\n        Bb7(13)   A7(13-)\nÉ impossível ser feliz\n   Dm7  G/D  Dm7  G/D\nSozinho\n\n[Segunda Parte]\n Gm7         C/Bb        Am7\nDa primeira vez era a cidade\nAb/Bb          Bb/Ab\nDa segunda, o cais\n           Gm7  A7(13-)  A7\nE a eternida___de\n\n[Terceira Parte]\nA7           D7M(9)\nAgora eu já sei\n   Bbº                    Am7  D7(9-)\nDa onda que se ergueu no mar\n          G7M            Gm6\nE das estrelas que esquecemos\n       F#7(13)  F#7(13-)  B7(9)\nDe contar\n\n        B7(9-)   E7(9)\nO amor se deixa surpreender\n            Bb7(13)   A7(13-)\nEnquanto a noite vem nos\n      Dm7  G/D  Dm7  G/D\nEnvolver\n\n[Solo]\nD7M  Bbº  Am7  D7(9-)\nG7M  Gm6  F#7(13)  F#7(13-)\nB7(9)  B7(9-)\nE7(9)  Bb7(13)  A7(13-)\nDm7  G/D  Dm7  G/D\n\n[Segunda Parte]\n(repete Segunda Parte)\n\n[Terceira Parte]\n(repete Terceira Parte)\n\n[Final]\n(repete Intro)\n           D7M(9)\nVou te contar";
+
 // Map of specific contents
 const SPECIFIC = {
   'Do Seu Lado': C_DOSEULADO,
@@ -732,7 +745,16 @@ const SPECIFIC = {
   'Outra Vida': C_OUTRAVIDA,
   'Só Sei Dançar Com Você': C_SOSEIDANCAR,
   'O Sol': C_OSOL,
-  'Sonífera Ilha': C_SONIFERAILHA
+  'Sonífera Ilha': C_SONIFERAILHA,
+  'Um Dia Um Adeus': C_UMDIAADEUS,
+  'De Tanto Amor': C_DETANTOAMOR,
+  'Chove Chuva': C_CHOVECHUVA,
+  'Palpite': C_PALPITE,
+  'Águas de Março': C_AGUASDEMARCO,
+  'Nada Mais': C_NADAMAIS,
+  'Você É Linda': C_VOCEELINDA,
+  'Todo Homem': C_TODOHOMEM,
+  'Wave': C_WAVE
 };
 
 const RAW_SONGS = [
@@ -771,7 +793,17 @@ const RAW_SONGS = [
   ['Poema','Ney Matogrosso','C','Ela','Intensa. Dramática.'],
   ['Vamos Fugir','Skank','F#m','Ela','Animada. Muito pedida.'],
   ['Outra Vida','Armandinho','Dm','Ela','Reggae. Levada suave.'],
-  ['Só Sei Dançar Com Você','Tulipa Ruiz','F','Ela','Repetitiva. Refrão fácil. Encerramento.']
+  ['Só Sei Dançar Com Você','Tulipa Ruiz','F','Ela','Repetitiva. Refrão fácil. Encerramento.'],
+  // ELA — novas (cifras/Ela, out/2026)
+  ['Um Dia Um Adeus','Guilherme Arantes','E','Ela','Romântica. Refrão marcante.'],
+  ['De Tanto Amor','Roberto Carlos','G','Ela','Afinação meio tom abaixo (soa em F#). Romântica.'],
+  ['Chove Chuva','Jorge Ben Jor','Am','Ela','Samba-rock. Suingada.'],
+  ['Palpite','Vanessa Rangel','E','Ela','Pop romântico. Frase 1 = riff da intro.'],
+  ['Águas de Março','Elis Regina','D','Ela','Capo na 1ª casa (soa em Eb). Clássico da MPB.'],
+  ['Nada Mais','Gal Costa','D','Ela','Capo na 3ª casa (soa em F). Versão de Lately (Stevie Wonder).'],
+  ['Você É Linda','Caetano Veloso','A','Ela','MPB. Suave.'],
+  ['Todo Homem','Zeca Veloso','G','Ela','Capo na 6ª casa (soa em Db). Suave.'],
+  ['Wave','Tom Jobim','Dm','Ela','Bossa nova. Harmonia rica.']
 ];
 
 // Build initial songs array
@@ -798,20 +830,46 @@ let S = {
   transpose: 0     // semitom offset da música ativa (não é salvo)
 };
 
+// Músicas novas do código precisam chegar em aparelhos que já têm repertório salvo.
+// SEEDED guarda os títulos do repertório-base já oferecidos ao aparelho — assim uma
+// música que o usuário apagou não reaparece.
+// Migração única para dados salvos antes desse controle existir: tudo que já estava
+// no código antes da leva de out/2026 conta como já oferecido.
+const SEED_ADDED_2026_10=['Um Dia Um Adeus','De Tanto Amor','Chove Chuva','Palpite','Águas de Março','Nada Mais','Você É Linda','Todo Homem','Wave'];
+let SEEDED=[];
+
 function save() {
   localStorage.setItem(ST_KEY, JSON.stringify({
-    songs: S.songs, blocks: S.blocks, theme: S.theme, collapsed: S.collapsed
+    songs: S.songs, blocks: S.blocks, theme: S.theme, collapsed: S.collapsed, seeded: SEEDED
   }));
+}
+
+function mergeNewSeedSongs(){
+  const have=new Set(S.songs.map(s=>s.title));
+  const offered=new Set(SEEDED);
+  let maxId=Math.max(0,...S.songs.map(s=>s.id));
+  let maxOrder=Math.max(0,...S.songs.map(s=>s.order||0));
+  let added=0;
+  INITIAL_SONGS.forEach(seed=>{
+    if(offered.has(seed.title)||have.has(seed.title)) return;
+    S.songs.push({...seed, playCount:0, id:++maxId, order:++maxOrder});
+    if(!S.blocks.includes(seed.block)) S.blocks.push(seed.block);
+    added++;
+  });
+  SEEDED=INITIAL_SONGS.map(s=>s.title);
+  if(added) save();
+  return added;
 }
 
 function load() {
   try {
     const d = JSON.parse(localStorage.getItem(ST_KEY)||'null');
     if (d) {
-      S.songs = d.songs || INITIAL_SONGS;
+      S.songs = d.songs || INITIAL_SONGS.map(s=>({...s}));
       S.blocks = d.blocks || S.blocks;
       S.theme = d.theme || 'dark';
       S.collapsed = d.collapsed || [];
+      SEEDED = d.seeded || INITIAL_SONGS.map(s=>s.title).filter(t=>!SEED_ADDED_2026_10.includes(t));
     } else {
       S.songs = INITIAL_SONGS.map(s=>({...s}));
     }
@@ -819,6 +877,7 @@ function load() {
     S.songs = INITIAL_SONGS.map(s=>({...s}));
   }
   S.songs = S.songs.map(s=>({playCount:0,...s}));
+  return mergeNewSeedSongs();
 }
 
 // ─── UTILS ───────────────────────────────────────────────────────────────────
@@ -829,11 +888,18 @@ function esc(s){
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
+// Acorde: raiz + qualidade/extensões (m, 7M, 7+, °, (9), (13-), (4/9)) + baixo ou
+// extensão após barra (D/F#, Eb7/5-, F#7/4/9). Parêntese solto no início/fim cobre
+// grupos como "(D#m7  A#7)".
+const CHORD_RE=/^\(?[A-G][#b]?(?:maj|min|dim|aug|sus|add|m|M|\d|[+\-°º]|\(\d+[+\-]?(?:\/\d+[+\-]?)*\))*(?:\/(?:[A-G][#b]?|\d+[+\-]?)(?:\/\d+[+\-]?)*)?\)?$/;
+
 function isChord(line) {
-  const t=line.trim();
+  let t=line.trim();
   if(!t)return false;
-  const toks=t.split(/\s+/);
-  return toks.length>0 && toks.every(tk=>/^[A-G][#b]?(m|M|maj|min|dim|aug|sus[24]?|add\d*|\d+)*(\/[A-G][#b]?)?$/.test(tk));
+  if(/^\(.*\)$/.test(t)) t=t.slice(1,-1).trim();     // linha toda entre parênteses: ( A G A Bm )
+  t=t.replace(/\s+\([^()]*\)\s*$/,'').trim();        // anotação no fim: (2x), (Frase 1)
+  if(!t)return false;
+  return t.split(/\s+/).every(tk=>CHORD_RE.test(tk));
 }
 
 // ─── TRANSPOSE ───────────────────────────────────────────────────────────────
@@ -851,6 +917,7 @@ function shiftNote(n,steps){
 
 function transposeToken(tok,steps){
   if(!steps)return tok;
+  if(tok.startsWith('(')) return '('+transposeToken(tok.slice(1),steps);
   // Slash chord: transpõe cada parte separadamente
   const si=tok.indexOf('/');
   if(si>0) return transposeToken(tok.slice(0,si),steps)+'/'+transposeToken(tok.slice(si+1),steps);
@@ -864,7 +931,8 @@ function transposeContent(content,steps){
   return content.split('\n').map(line=>{
     if(!isChord(line))return line;
     // split preservando grupos de espaço (alinhamento dos acordes)
-    return line.split(/(\s+)/).map(p=>/\S/.test(p)?transposeToken(p,steps):p).join('');
+    // só transpõe o que é acorde — anotações como "(Frase 1)" ficam intactas
+    return line.split(/(\s+)/).map(p=>CHORD_RE.test(p)?transposeToken(p,steps):p).join('');
   }).join('\n');
 }
 
@@ -894,6 +962,53 @@ function fmtContent(raw){
     if(!line.trim()) return `<span class="cs-empty"> </span>`;
     return `<span class="cs-lyric">${e}</span>`;
   }).join('');
+}
+
+// ─── AUTO-AJUSTE DA CIFRA ────────────────────────────────────────────────────
+// Acorde depende de alinhamento monoespaçado, então a linha nunca pode quebrar.
+// Em vez de fonte fixa por tamanho de tela, calcula por música o maior tamanho
+// que faz a linha mais longa caber na largura útil (por coluna).
+let _monoRatio=0, _fitT;
+
+function monoCharRatio(fontFamily){
+  if(_monoRatio) return _monoRatio;
+  const probe=document.createElement('span');
+  probe.style.cssText='position:absolute;visibility:hidden;white-space:pre;font-weight:700;font-size:100px';
+  probe.style.fontFamily=fontFamily;
+  probe.textContent='M'.repeat(20);
+  document.body.appendChild(probe);
+  _monoRatio=(probe.getBoundingClientRect().width/20/100)||0.6;
+  probe.remove();
+  return _monoRatio;
+}
+
+function fitCifra(){
+  const el=$id('s-content');
+  if(!el||!el.offsetParent||!el.children.length) return;
+  el.style.fontSize='';
+  el.style.columnCount='';
+  const cs=getComputedStyle(el);
+  const ratio=monoCharRatio(cs.fontFamily);
+  const lens=Array.from(el.children).map(c=>c.textContent.replace(/\t/g,'    ').length);
+  const maxChars=Math.max(20,...lens);   // piso evita fonte gigante em música curtíssima
+  const avail=el.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight);
+  if(avail<=0) return;
+  const gapPx=parseFloat(cs.columnGap);
+  const gapEm=isNaN(gapPx)?1:gapPx/parseFloat(cs.fontSize);
+  const fscale=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--fscale'))||1;
+  const stage=document.body.classList.contains('stage');
+  const maxPx=(stage?30:22)*fscale;
+  const minPx=10;
+  const sizeFor=c=>(avail*0.97)/(c*maxChars*ratio+(c-1)*gapEm);
+  let cols=parseInt(cs.columnCount,10)||1;
+  let size=sizeFor(cols);
+  if(cols>1&&size<15){ cols=1; size=sizeFor(1); el.style.columnCount='1'; }
+  el.style.fontSize=Math.max(minPx,Math.min(maxPx,size)).toFixed(1)+'px';
+}
+
+function scheduleFit(){
+  clearTimeout(_fitT);
+  _fitT=setTimeout(fitCifra,60);
 }
 
 function toast(msg, type='ok'){
@@ -996,6 +1111,7 @@ function renderStage(){
   else{origEl.style.display='none';}
   $id('s-obs').textContent=s.observations||'';
   $id('s-content').innerHTML=fmtContent(transposeContent(s.content,steps));
+  scheduleFit();
 
   const all=allSongsOrdered();
   const idx=all.findIndex(x=>x.id===S.activeId);
@@ -1186,6 +1302,7 @@ function toggleStage(){
   S.stageMode=!S.stageMode;
   document.body.classList.toggle('stage', S.stageMode);
   if(S.stageMode && window.innerWidth<=768) closeMobileSidebar();
+  scheduleFit();
 }
 
 function navSong(dir){
@@ -1331,6 +1448,7 @@ function applyFont(){
   localStorage.setItem('compasso_font', fontIdx);
   const lbl=document.getElementById('font-label');
   if(lbl) lbl.textContent=Math.round(scale*100)+'%';
+  scheduleFit();
 }
 
 function adjustFont(dir){
@@ -1471,7 +1589,8 @@ function initLicense() {
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 function init(){
   _tid = 200;
-  load();
+  const novas = load();
+  if(novas) setTimeout(()=>toast(`${novas} música${novas>1?'s novas adicionadas':' nova adicionada'} ao repertório`),600);
   fontIdx = parseInt(localStorage.getItem('compasso_font')||'2',10);
   applyFont();
   if(S.songs.length){
@@ -1482,6 +1601,16 @@ function init(){
   navTo(1);
   render();
   initLicense();
+  // Reajusta a cifra quando a largura útil muda (girar celular, abrir/fechar sidebar, redimensionar)
+  if('ResizeObserver' in window){
+    let lastW=0;
+    new ResizeObserver(entries=>{
+      const w=Math.round(entries[0].contentRect.width);
+      if(w!==lastW){ lastW=w; scheduleFit(); }
+    }).observe($id('vs'));
+  } else {
+    window.addEventListener('resize',scheduleFit);
+  }
 }
 
 init();
