@@ -21,7 +21,7 @@ let S = {
 // música que o usuário apagou não reaparece.
 // Migração única para dados salvos antes desse controle existir: tudo que já estava
 // no código antes da leva de out/2026 conta como já oferecido.
-const SEED_ADDED_2026_10=['Um Dia Um Adeus','De Tanto Amor','Chove Chuva','Palpite','Águas de Março','Nada Mais','Você É Linda','Todo Homem','Wave'];
+const SEED_ADDED_2026_10=['Um Dia Um Adeus','De Tanto Amor','Chove Chuva','Palpite','Águas de Março','Nada Mais','Você É Linda','Todo Homem','Wave','O Sol (Vitor Kley)','Só Os Loucos Sabem','Sem Futuro','Eu Não Sou Boa Influência','Me Adora'];
 
 let SEEDED=[];
 
